@@ -2,7 +2,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {map, Observable} from 'rxjs';
-import {AlbionData, Weapon} from "../data-types/albion-data";
+import {AlbionData} from "../data-types/albion-data";
 
 @Injectable({providedIn: 'root'})
 export class AlbionItemsService {
@@ -12,11 +12,8 @@ export class AlbionItemsService {
   loadItems(): Observable<AlbionData> {
     return this.http.get<any>('/assets/items.json').pipe(
       map(data => {
-        // console.log(data.weapon.map((w: Weapon) => w.uniquename))
-
-        const x = this.normalizeKeys(data.items);
-        console.log(x.weapon.map((w: Weapon) => w.uniquename))
-        return x as AlbionData;
+        const toReturn = this.normalizeKeys(data.items);
+        return toReturn as AlbionData;
       }))
   };
 
@@ -27,16 +24,23 @@ export class AlbionItemsService {
       const newObj: any = {};
       for (const key of Object.keys(obj)) {
         const cleanKey = key.replace(/^@/, '');
-        const normalizedValue = this.normalizeKeys(obj[key]);
+        let value = this.normalizeKeys(obj[key]);
 
-        if (cleanKey === 'craftingrequirements' && !Array.isArray(normalizedValue)) {
-          newObj[cleanKey] = [normalizedValue];
-        } else {
-          newObj[cleanKey] = normalizedValue;
+        // Normalizacja konkretnych kluczy, jeśli nie są tablicą
+        if ((cleanKey === 'craftingrequirements' || cleanKey === 'craftresource' || cleanKey === 'upgraderesource') && !Array.isArray(value)) {
+          value = [value];
         }
+
+        // UWAGA: enchantments.enchantment może być obiektem (rzadko), więc warto zabezpieczyć
+        if (cleanKey === 'enchantment' && !Array.isArray(value)) {
+          value = [value];
+        }
+
+        newObj[cleanKey] = value;
       }
       return newObj;
     }
     return obj;
   }
+
 }
