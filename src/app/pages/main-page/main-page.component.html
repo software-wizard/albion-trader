@@ -1,62 +1,6 @@
-<div *ngIf="dataEntries?.weapon as weapons">
-  <div *ngFor="let item of weapons">
-    <hr/>
-    <!-- Nazwa + ikona -->
-    <div style="display: flex; align-items: center; gap: 1rem;">
-      <img
-        [src]="'https://render.albiononline.com/v1/item/' + item.uniquename + '.png'"
-        width="64"
-        height="64"
-        alt="{{ item.uniquename }}"
-      />
-      <div>{{ item.uniquename }}</div>
-    </div>
-
-    <!-- 🔹 Receptura bazowa -->
-    <div *ngFor="let recipe of item.craftingrequirements ?? []" style="margin-left: 2rem;">
-      <ul style="list-style: none; padding-left: 0;">
-        <li *ngFor="let res of recipe.craftresource" style="display: flex; align-items: center; gap: 0.5rem;">
-          <img
-            [src]="'https://render.albiononline.com/v1/item/' + res.uniquename + '.png'"
-            width="24"
-            height="24"
-            alt="{{ res.uniquename }}"
-          />
-          <span>{{ res.uniquename }} × {{ res.count }}</span>
-        </li>
-      </ul>
-    </div>
-
-    <!-- 🔹 Enchanty -->
-    <div *ngIf="hasEnchantments(item)">
-      <div
-        *ngFor="let enchant of item.enchantments!.enchantment; let i = index"
-        style="margin-left: 2rem; margin-top: 0.5rem;"
-      >
-        <div style="display: flex; align-items: center; gap: 1rem;">
-          <img
-            [src]="'https://render.albiononline.com/v1/item/' + item.uniquename + '@' + (i + 1) + '.png'"
-            width="48"
-            height="48"
-            alt="{{ item.uniquename }}@{{ i + 1 }}"
-          />
-          <div>Enchant &#64;{{ i + 1 }}</div>
-        </div>
-
-        <div *ngFor="let recipe of enchant.craftingrequirements ?? []">
-          <ul style="list-style: none; padding-left: 0; margin-top: 0.25rem;">
-            <li *ngFor="let res of recipe.craftresource" style="display: flex; align-items: center; gap: 0.5rem;">
-              <img
-                [src]="'https://render.albiononline.com/v1/item/' + res.uniquename + '.png'"
-                width="24"
-                height="24"
-                alt="{{ res.uniquename }}"
-              />
-              <span>{{ res.uniquename }} × {{ res.count }}</span>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+<ng-container *ngIf="dataEntries?.weapon as weapons">
+  <app-weapon
+    *ngFor="let item of weapons"
+    [weapon]="item"
+  />
+</ng-container>

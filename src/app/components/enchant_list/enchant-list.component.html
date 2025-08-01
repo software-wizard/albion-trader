@@ -1,0 +1,19 @@
+<div
+  *ngFor="let enchant of enchantments; let i = index"
+  style="margin-left: 2rem; margin-top: 0.5rem;"
+>
+  <div style="display: flex; align-items: center; gap: 1rem;">
+    <img
+      [src]="'https://render.albiononline.com/v1/item/' + weaponName + '@' + (i + 1) + '.png'"
+      width="48"
+      height="48"
+      alt="{{ weaponName }}@{{ i + 1 }}"
+    />
+    <div>Enchant &#64;{{ i + 1 }}</div>
+  </div>
+
+  <app-recipe-list
+    *ngFor="let recipe of enchant.craftingrequirements ?? []"
+    [resources]="recipe.craftresource"
+/>
+</div>

@@ -3,11 +3,12 @@ import {CommonModule} from '@angular/common';
 import {firstValueFrom} from 'rxjs';
 import {AlbionItemsService} from "../../services/item-static-data-service";
 import {AlbionData, Weapon} from "../../data-types/albion-data";
+import {WeaponComponent} from "../../components/weapon/weapon.component";
 
 @Component({
   selector: 'app-main-page',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, WeaponComponent],
   templateUrl: './main-page.component.html',
 })
 export class MainPageComponent implements OnInit {

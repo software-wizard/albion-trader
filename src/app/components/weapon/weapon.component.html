@@ -1,0 +1,24 @@
+<hr />
+<!-- Nazwa + ikona -->
+<div style="display: flex; align-items: center; gap: 1rem;">
+  <img
+    [src]="'https://render.albiononline.com/v1/item/' + weapon.uniquename + '.png'"
+    width="64"
+    height="64"
+    alt="{{ weapon.uniquename }}"
+  />
+  <div>{{ weapon.uniquename }}</div>
+</div>
+
+<!-- Receptura -->
+<app-recipe-list
+  *ngFor="let recipe of weapon.craftingrequirements ?? []"
+  [resources]="recipe.craftresource"
+/>
+
+<!-- Enchanty -->
+<app-enchant-list
+  *ngIf="weapon.enchantments?.enchantment?.length"
+  [weaponName]="weapon.uniquename"
+  [enchantments]="weapon.enchantments?.enchantment ?? []"
+/>

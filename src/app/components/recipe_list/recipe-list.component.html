@@ -1,0 +1,11 @@
+<ul style="list-style: none; padding-left: 2rem;">
+  <li *ngFor="let res of resources" style="display: flex; align-items: center; gap: 0.5rem;">
+    <img
+      [src]="'https://render.albiononline.com/v1/item/' + res.uniquename + '.png'"
+      width="24"
+      height="24"
+      alt="{{ res.uniquename }}"
+    />
+    <span>{{ res.uniquename }} × {{ res.count }}</span>
+  </li>
+</ul>
