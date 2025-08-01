@@ -1,0 +1,15 @@
+<table>
+  <thead>
+  <tr>
+    <th>Item</th><th>City</th><th>Sell min</th><th>Buy max</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let p of prices">
+    <td>{{ p.item_id }}</td>
+    <td>{{ p.city }}</td>
+    <td>{{ p.sell_price_min }}</td>
+    <td>{{ p.buy_price_max }}</td>
+  </tr>
+  </tbody>
+</table>

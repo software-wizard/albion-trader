@@ -1,0 +1,31 @@
+<div *ngIf="dataEntries?.weapon as weapons">
+  <div *ngFor="let item of weapons">
+    <hr/>
+    <!-- Nazwa + ikona -->
+    <div style="display: flex; align-items: center; gap: 1rem;">
+      <img
+        [src]="'https://render.albiononline.com/v1/item/' + item.uniquename + '.png'"
+        width="64"
+        height="64"
+        alt="{{ item.uniquename }}"
+      />
+      <div>{{ item.uniquename }}</div>
+    </div>
+
+    <!-- Enchanty -->
+    <div *ngIf="hasEnchantments(item)">
+      <div
+        *ngFor="let enchant of item.enchantments!.enchantment; let i = index"
+        style="display: flex; align-items: center; gap: 1rem; margin-top: 0.25rem;"
+      >
+        <img
+          [src]="'https://render.albiononline.com/v1/item/' + item.uniquename + '@' + (i + 1) + '.png'"
+          width="48"
+          height="48"
+          alt="{{ item.uniquename }}@{{ i + 1 }}"
+        />
+        <div>Enchant &#64;{{ i + 1 }}</div>
+      </div>
+    </div>
+  </div>
+</div>

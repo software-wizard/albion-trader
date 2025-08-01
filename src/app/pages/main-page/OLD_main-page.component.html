@@ -1,0 +1,68 @@
+<div *ngIf="dataEntries?.weapon as weapons">
+  <div *ngFor="let item of weapons">
+
+    <!-- 🔻 SEPARATOR z nazwą broni -->
+    <hr />
+    <h2>{{ item.uniquename }}</h2>
+
+    <!-- 🔹 PRZYPADKI BEZ ENCHANTÓW -->
+    <div *ngIf="item.craftingrequirements?.length">
+      <div style="display: flex; gap: 1rem; align-items: center;">
+        <img
+          [src]="'https://render.albiononline.com/v1/item/' + item.uniquename + '.png'"
+          width="64"
+          height="64"
+        />
+        <ul>
+          <li *ngFor="let requirement of item.craftingrequirements">
+            <ul>
+              <li *ngFor="let res of requirement.craftresource">
+                <img
+                  [src]="'https://render.albiononline.com/v1/item/' + res.uniquename + '.png'"
+                  width="24"
+                  height="24"
+                  style="vertical-align: middle; margin-right: 0.5rem;"
+                />
+                {{ res.uniquename }} × {{ res.count }}
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 🔹 PRZYPADKI Z ENCHANTAMI -->
+    <div *ngIf="item.enchantments?.enchantment as enchants">
+      <div
+        *ngFor="let enchant of enchants; let i = index"
+        style="margin-top: 1rem;"
+      >
+        <div style="display: flex; gap: 1rem; align-items: center;">
+          <img
+            [src]="'https://render.albiononline.com/v1/item/' + item.uniquename + '@' + (i + 1) + '.png'"
+            width="64"
+            height="64"
+          />
+          <strong>Enchant {{ '@' + (i + 1) }}</strong>
+        </div>
+
+        <div
+          *ngFor="let requirement of enchant.craftingrequirements"
+          style="margin-left: 2rem;"
+        >
+          <ul>
+            <li *ngFor="let res of requirement.craftresource">
+              <img
+                [src]="'https://render.albiononline.com/v1/item/' + res.uniquename + '.png'"
+                width="24"
+                height="24"
+                style="vertical-align: middle; margin-right: 0.5rem;"
+              />
+              {{ res.uniquename }} × {{ res.count }}
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
