@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EnchantmentEntry } from '../../data-types/albion-data';
-import {RecipeListComponent} from "../recipe_list/recipe-list.component";
+import {RecipeListComponent} from "../recipe-list/recipe-list.component";
 
 @Component({
   selector: 'app-enchant-list',
