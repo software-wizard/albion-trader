@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CraftResource } from '../../data-types/albion-data';
+import {CraftResource, CraftResourceRequirements} from '../../data-types/albion-data';
 
 @Component({
   selector: 'app-recipe-list',
@@ -9,5 +9,5 @@ import { CraftResource } from '../../data-types/albion-data';
   templateUrl: './recipe-list.component.html',
 })
 export class RecipeListComponent {
-  @Input() resources: CraftResource[] = [];
+  @Input() craftingrequirements: CraftResourceRequirements[] = [];
 }

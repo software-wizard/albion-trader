@@ -1,32 +1,31 @@
-import { Meta, StoryObj } from '@storybook/angular';
-import { RecipeListComponent } from './recipe-list.component';
-import { CommonModule } from '@angular/common';
+import {Meta, moduleMetadata, StoryObj} from '@storybook/angular';
+import {RecipeListComponent} from './recipe-list.component';
+import {CommonModule} from '@angular/common';
+import {CraftResource} from "../../data-types/albion-data";
 
-const meta: Meta<RecipeListComponent> = {
-  title: 'Albion/RecipeListComponent',
+export default {
+  title: 'RecipeListComponent',
   component: RecipeListComponent,
   decorators: [
-    {
+    moduleMetadata({
       imports: [CommonModule, RecipeListComponent],
-    },
+    }),
   ],
-};
+} as Meta<RecipeListComponent>;
 
-export default meta;
 type Story = StoryObj<RecipeListComponent>;
 
 export const Default: Story = {
+
   args: {
-    recipes: [
-      {
-        silver: '0',
-        time: '3.333',
-        craftingfocus: '9191',
-        craftresource: [
-          { uniquename: 'T7_PLANKS', count: '32' },
-          { uniquename: 'T7_ARTEFACT_2H_BOW_HELL', count: '1' }
-        ],
-      },
-    ]
+    craftingrequirements: [{
+      silver: '0',
+      time: '1',
+      craftingfocus: '1286',
+      craftresource: [
+        { uniquename: 'T4_PLANKS', count: '8' },
+        { uniquename: 'T4_METALBAR', count: '16' }
+      ]
+    }],
   },
 };

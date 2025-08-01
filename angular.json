@@ -32,12 +32,7 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": [],
-            "server": "src/main.server.ts",
-            "prerender": true,
-            "ssr": {
-              "entry": "server.ts"
-            }
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -105,13 +100,7 @@
           "options": {
             "configDir": ".storybook",
             "browserTarget": "albion-calc:build",
-            "compodoc": true,
-            "compodocArgs": [
-              "-e",
-              "json",
-              "-d",
-              "."
-            ],
+            "compodoc": false,
             "port": 6006
           }
         },
@@ -120,13 +109,7 @@
           "options": {
             "configDir": ".storybook",
             "browserTarget": "albion-calc:build",
-            "compodoc": true,
-            "compodocArgs": [
-              "-e",
-              "json",
-              "-d",
-              "."
-            ],
+            "compodoc": false,
             "outputDir": "storybook-static"
           }
         }

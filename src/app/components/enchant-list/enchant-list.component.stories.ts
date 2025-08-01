@@ -1,18 +1,17 @@
-import { Meta, StoryObj } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { EnchantListComponent } from './enchant-list.component';
 import { CommonModule } from '@angular/common';
 
-const meta: Meta<EnchantListComponent> = {
-  title: 'Albion/EnchantListComponent',
+export default {
+  title: 'EnchantListComponent',
   component: EnchantListComponent,
   decorators: [
-    {
+    moduleMetadata({
       imports: [CommonModule, EnchantListComponent],
-    },
+    }),
   ],
-};
+} as Meta<EnchantListComponent>;
 
-export default meta;
 type Story = StoryObj<EnchantListComponent>;
 
 export const Default: Story = {
@@ -29,7 +28,7 @@ export const Default: Story = {
             craftingfocus: '16085',
             craftresource: [
               { uniquename: 'T7_PLANKS_LEVEL1', count: '32' },
-              { uniquename: 'T7_ARTEFACT_2H_BOW_HELL', count: '1' }
+              { uniquename: 'T7_ARTEFACT_2H_BOW_HELL', count: '1' },
             ],
           },
         ],
@@ -45,11 +44,11 @@ export const Default: Story = {
             craftingfocus: '28148',
             craftresource: [
               { uniquename: 'T7_PLANKS_LEVEL2', count: '32' },
-              { uniquename: 'T7_ARTEFACT_2H_BOW_HELL', count: '1' }
+              { uniquename: 'T7_ARTEFACT_2H_BOW_HELL', count: '1' },
             ],
           },
         ],
-      }
-    ]
+      },
+    ],
   },
 };
