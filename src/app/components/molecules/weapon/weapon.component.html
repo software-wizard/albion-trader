@@ -1,0 +1,14 @@
+<hr/>
+<div>
+  <app-icon [itemName]="weapon.uniquename"/>
+  <div>{{ weapon.uniquename }}</div>
+</div>
+
+<div *ngFor="let flatCraft of weapon.craftingrequirements; let i = index">
+  <app-recipe [craftingrequirement]="flatCraft"></app-recipe>
+</div>
+
+<div *ngFor="let enchantCraft of weapon.enchantments?.enchantment; let i = index">
+  <app-separator/>
+  <app-enchant-recipe [enchant]=enchantCraft></app-enchant-recipe>
+</div>

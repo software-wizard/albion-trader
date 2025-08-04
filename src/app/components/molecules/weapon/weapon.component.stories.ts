@@ -3,7 +3,7 @@ import { WeaponComponent } from './weapon.component';
 import { CommonModule } from '@angular/common';
 
 export default {
-  title: 'Organisms/WeaponComponent',
+  title: 'Molecules/WeaponComponent',
   component: WeaponComponent,
   decorators: [
     moduleMetadata({
@@ -95,7 +95,7 @@ export const Default: Story = {
             enchantmentlevel: '1',
             itempower: '800',
             durability: '20250',
-            craftingrequirements: {
+            craftingrequirements: [{
               silver: '0',
               time: '1.5',
               craftingfocus: '2251',
@@ -103,7 +103,7 @@ export const Default: Story = {
                 { uniquename: 'T4_PLANKS_LEVEL1', enchantmentlevel: '1', count: '8' },
                 { uniquename: 'T4_METALBAR_LEVEL1', enchantmentlevel: '1', count: '16' }
               ]
-            },
+            }],
             upgraderequirements: {
               upgraderesource: {
                 uniquename: 'T4_RUNE',
@@ -115,7 +115,7 @@ export const Default: Story = {
             enchantmentlevel: '2',
             itempower: '900',
             durability: '30375',
-            craftingrequirements: {
+            craftingrequirements: [{
               silver: '0',
               time: '2',
               craftingfocus: '3939',
@@ -123,7 +123,7 @@ export const Default: Story = {
                 { uniquename: 'T4_PLANKS_LEVEL2', enchantmentlevel: '2', count: '8' },
                 { uniquename: 'T4_METALBAR_LEVEL2', enchantmentlevel: '2', count: '16' }
               ]
-            },
+            }],
             upgraderequirements: {
               upgraderesource: {
                 uniquename: 'T4_SOUL',
@@ -135,7 +135,7 @@ export const Default: Story = {
             enchantmentlevel: '3',
             itempower: '1000',
             durability: '45563',
-            craftingrequirements: {
+            craftingrequirements: [{
               silver: '0',
               time: '2.5',
               craftingfocus: '6893',
@@ -143,7 +143,7 @@ export const Default: Story = {
                 { uniquename: 'T4_PLANKS_LEVEL3', enchantmentlevel: '3', count: '8' },
                 { uniquename: 'T4_METALBAR_LEVEL3', enchantmentlevel: '3', count: '16' }
               ]
-            },
+            }],
             upgraderequirements: {
               upgraderesource: {
                 uniquename: 'T4_RELIC',
@@ -155,7 +155,7 @@ export const Default: Story = {
             enchantmentlevel: '4',
             itempower: '1100',
             durability: '68344',
-            craftingrequirements: {
+            craftingrequirements: [{
               silver: '0',
               time: '3.75',
               craftingfocus: '12064',
@@ -163,7 +163,7 @@ export const Default: Story = {
                 { uniquename: 'T4_PLANKS_LEVEL4', enchantmentlevel: '4', count: '8' },
                 { uniquename: 'T4_METALBAR_LEVEL4', enchantmentlevel: '4', count: '16' }
               ]
-            }
+            }]
           }
         ]
       }

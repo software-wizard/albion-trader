@@ -1,18 +1,18 @@
 import {Meta, moduleMetadata, StoryObj} from '@storybook/angular';
-import {RecipeEntryComponent} from './recipe-entry.component';
+import {CraftResourceComponent} from './craft-resource.component';
 import {CommonModule} from '@angular/common';
 
 export default {
-  title: 'Atoms/RecipeEntry',
-  component: RecipeEntryComponent,
+  title: 'molecules/CraftResource',
+  component: CraftResourceComponent,
   decorators: [
     moduleMetadata({
-      imports: [CommonModule, RecipeEntryComponent],
+      imports: [CommonModule, CraftResourceComponent],
     }),
   ],
-} as Meta<RecipeEntryComponent>;
+} as Meta<CraftResourceComponent>;
 
-type Story = StoryObj<RecipeEntryComponent>;
+type Story = StoryObj<CraftResourceComponent>;
 
 export const Default: Story = {
   args: {

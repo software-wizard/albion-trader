@@ -6,21 +6,12 @@
 
     <div *ngIf="item.craftingrequirements?.length">
       <div style="display: flex; gap: 1rem; align-items: center;">
-        <img
-          [src]="'https://render.albiononline.com/v1/item/' + item.uniquename + '.png'"
-          width="64"
-          height="64"
-        />
+        <app-icon [itemName]="item.uniquename"/>
         <ul>
           <li *ngFor="let requirement of item.craftingrequirements">
             <ul>
               <li *ngFor="let res of requirement.craftresource">
-                <img
-                  [src]="'https://render.albiononline.com/v1/item/' + res.uniquename + '.png'"
-                  width="24"
-                  height="24"
-                  style="vertical-align: middle; margin-right: 0.5rem;"
-                />
+                <app-icon [itemName]="res.uniquename"/>
                 {{ res.uniquename }} × {{ res.count }}
               </li>
             </ul>
@@ -35,11 +26,7 @@
         style="margin-top: 1rem;"
       >
         <div style="display: flex; gap: 1rem; align-items: center;">
-          <img
-            [src]="'https://render.albiononline.com/v1/item/' + item.uniquename + '@' + (i + 1) + '.png'"
-            width="64"
-            height="64"
-          />
+          <app-icon [itemName]="item.uniquename"/>
           <strong>Enchant {{ '@' + (i + 1) }}</strong>
         </div>
 
@@ -49,12 +36,7 @@
         >
           <ul>
             <li *ngFor="let res of requirement.craftresource">
-              <img
-                [src]="'https://render.albiononline.com/v1/item/' + res.uniquename + '.png'"
-                width="24"
-                height="24"
-                style="vertical-align: middle; margin-right: 0.5rem;"
-              />
+              <app-icon [itemName]="res.uniquename"/>
               {{ res.uniquename }} × {{ res.count }}
             </li>
           </ul>

@@ -665,4 +665,5 @@ export interface CraftResourceRequirements {
 export interface CraftResource {
   uniquename: string;
   count: string;
+  enchantmentlevel?: string;
 }

@@ -10,6 +10,5 @@ import {CraftRecipeComponent} from "../craft-recipe/craft-recipe.component";
   templateUrl: './enchant-recipe.component.html',
 })
 export class EnchantRecipeComponent {
-  @Input() enchantment!: EnchantmentEntry;
-  protected readonly JSON = JSON;
+  @Input() enchant!: EnchantmentEntry;
 }
