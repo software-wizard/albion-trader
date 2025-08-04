@@ -1,0 +1,5 @@
+<ul style="list-style: none; padding-left: 2rem;">
+  <li *ngFor="let res of craftingrequirement.craftresource" style="display: flex; align-items: center; gap: 0.5rem;">
+    <app-recipe-entry [craftResource]="res"></app-recipe-entry>
+  </li>
+</ul>

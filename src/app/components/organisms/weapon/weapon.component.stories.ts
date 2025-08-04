@@ -3,7 +3,7 @@ import { WeaponComponent } from './weapon.component';
 import { CommonModule } from '@angular/common';
 
 export default {
-  title: 'WeaponComponent',
+  title: 'Organisms/WeaponComponent',
   component: WeaponComponent,
   decorators: [
     moduleMetadata({
@@ -57,7 +57,7 @@ export const Default: Story = {
       physicalattackdamagebonus: '0',
       magicattackdamagebonus: '0',
       shopsubcategory2: 'axe_main_axe',
-      craftingrequirements: {
+      craftingrequirements: [{
         silver: '0',
         time: '1',
         craftingfocus: '1286',
@@ -65,7 +65,7 @@ export const Default: Story = {
           { uniquename: 'T4_PLANKS', count: '8' },
           { uniquename: 'T4_METALBAR', count: '16' }
         ]
-      },
+      }],
       SocketPreset: {
         name: 'MAINHAND'
       },
