@@ -1,7 +1,8 @@
 import {Meta, moduleMetadata, StoryObj} from '@storybook/angular';
 import {PriceDisplayComponent} from './price-display.component';
-import data from './price-display-mock.json';
-import {PriceEntry, PriceType} from "../../../data-types/albion-price-data";
+import data from './t41-battle-axe-mock.json';
+import data2 from './t41-ore-mock.json';
+import {ItemQuality, PriceEntry, PriceType} from "../../../data-types/albion-price-data";
 import {CommonModule} from "@angular/common";
 
 export default {
@@ -19,9 +20,17 @@ export default {
 
 type Story = StoryObj<PriceDisplayComponent>;
 
-export const Default: Story = {
+export const Weapons: Story = {
   args: {
     data: data as PriceEntry[],
+    displayType: PriceType.SellMin,
+  },
+};
+
+export const Resources: Story = {
+  args: {
+    visibleQualities: [ItemQuality.Normal],
+    data: data2 as PriceEntry[],
     displayType: PriceType.SellMin,
   },
 };

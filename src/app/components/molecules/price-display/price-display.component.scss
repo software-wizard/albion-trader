@@ -1,16 +1,30 @@
-.price-display-wrapper {
-  display: flex;
+.wrapper {
+  display: inline-flex;
   flex-direction: column;
-  width: fit-content;
+  gap: 4px;
 }
+
 .row {
   display: flex;
-  gap: 2px;
-  border-radius: 8px;
+  gap: 4px;
   align-items: center;
 }
+
 .cell {
   text-align: center;
-  padding: 4px;
+  padding: 4px 8px;
+  font-variant-numeric: tabular-nums;
   min-width: 60px;
+  border-radius: 6px;
+}
+
+.label-cell {
+  font-weight: bold;
+  min-width: 120px;
+}
+
+.header-cell {
+  font-weight: bold;
+  background: #f0f0f0;
+  border-radius: 6px;
 }
