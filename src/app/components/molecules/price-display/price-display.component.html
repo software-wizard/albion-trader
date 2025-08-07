@@ -1,0 +1,14 @@
+<div class="wrapper">
+  <div
+    class="row"
+    *ngFor="let row of rows"
+    [ngStyle]="{ 'background-color': row.bg }">
+    <div
+      class="cell"
+      *ngFor="let cell of row.values"
+      [matTooltip]="row.city + ': ' + (cell.date | date: 'short')"
+      matTooltipPosition="above">
+      {{ cell.value }}
+    </div>
+  </div>
+</div>
