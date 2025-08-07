@@ -1,18 +1,18 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {map, Observable} from 'rxjs';
-import {AlbionData} from "../data-types/albion-data";
+import {AlbionStaticData} from "../data-types/albion-static-data";
 
 @Injectable({providedIn: 'root'})
 export class AlbionItemsService {
   constructor(private http: HttpClient) {
   }
 
-  loadItems(): Observable<AlbionData> {
+  loadItems(): Observable<AlbionStaticData> {
     return this.http.get<any>('/assets/items.json').pipe(
       map(data => {
         const toReturn = this.normalizeKeys(data.items);
-        return toReturn as AlbionData;
+        return toReturn as AlbionStaticData;
       }))
   };
 

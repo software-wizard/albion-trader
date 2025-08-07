@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {firstValueFrom} from 'rxjs';
 import {AlbionItemsService} from "../../services/item-static-data-service";
-import {AlbionData, Weapon} from "../../data-types/albion-data";
+import {AlbionStaticData, Weapon} from "../../data-types/albion-static-data";
 import {WeaponComponent} from "../../components/molecules/weapon/weapon.component";
 
 @Component({
@@ -12,7 +12,7 @@ import {WeaponComponent} from "../../components/molecules/weapon/weapon.componen
   templateUrl: './main-page.component.html',
 })
 export class MainPageComponent implements OnInit {
-  dataEntries?: AlbionData;
+  dataEntries?: AlbionStaticData;
 
   constructor(private itemsService: AlbionItemsService) {
   }

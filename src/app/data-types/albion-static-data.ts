@@ -1,4 +1,4 @@
-export interface AlbionData {
+export interface AlbionStaticData {
   shopcategories: Shopcategories;
   hideoutitem: Hideoutitem;
   trackingitem: Trackingitem[];

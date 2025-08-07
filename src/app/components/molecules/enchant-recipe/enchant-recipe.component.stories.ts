@@ -5,6 +5,9 @@ import {CommonModule} from '@angular/common';
 export default {
   title: 'Molecules/SeparatorComponent',
   component: EnchantRecipeComponent,
+  parameters: {
+    layout: 'centered',
+  },
   decorators: [
     moduleMetadata({
       imports: [CommonModule, EnchantRecipeComponent],

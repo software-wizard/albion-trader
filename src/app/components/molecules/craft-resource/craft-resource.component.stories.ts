@@ -5,6 +5,9 @@ import {CommonModule} from '@angular/common';
 export default {
   title: 'molecules/CraftResource',
   component: CraftResourceComponent,
+  parameters: {
+    layout: 'centered',
+  },
   decorators: [
     moduleMetadata({
       imports: [CommonModule, CraftResourceComponent],

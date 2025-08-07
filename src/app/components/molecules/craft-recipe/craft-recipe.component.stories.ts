@@ -5,6 +5,9 @@ import {CommonModule} from '@angular/common';
 export default {
   title: 'Molecules/CraftRecipeComponent',
   component: CraftRecipeComponent,
+  parameters: {
+    layout: 'centered',
+  },
   decorators: [
     moduleMetadata({
       imports: [CommonModule, CraftRecipeComponent],

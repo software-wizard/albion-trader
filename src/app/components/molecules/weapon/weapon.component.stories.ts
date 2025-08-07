@@ -5,6 +5,9 @@ import { CommonModule } from '@angular/common';
 export default {
   title: 'Molecules/WeaponComponent',
   component: WeaponComponent,
+  parameters: {
+    layout: 'centered',
+  },
   decorators: [
     moduleMetadata({
       imports: [CommonModule, WeaponComponent],

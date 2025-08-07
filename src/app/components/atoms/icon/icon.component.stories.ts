@@ -3,6 +3,9 @@ import {IconComponent} from "./icon.component";
 
 const meta: Meta<IconComponent> = {
   component: IconComponent,
+  parameters: {
+    layout: 'centered',
+  },
   title: 'atoms/IconComponent',
 };
 export default meta;
