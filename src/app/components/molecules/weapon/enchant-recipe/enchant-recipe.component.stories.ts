@@ -3,7 +3,7 @@ import {EnchantRecipeComponent} from './enchant-recipe.component';
 import {CommonModule} from '@angular/common';
 
 export default {
-  title: 'Molecules/SeparatorComponent',
+  title: 'Molecules/EnchantRecipeComponent',
   component: EnchantRecipeComponent,
   parameters: {
     layout: 'centered',

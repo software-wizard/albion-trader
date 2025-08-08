@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {CraftResource} from "../../../data-types/albion-static-data";
-import {IconComponent} from "../../atoms/icon/icon.component";
-import {LabelComponent} from "../../atoms/label/label.component";
+import {CraftResource} from "../../../../data-types/albion-static-data";
+import {IconComponent} from "../../../atoms/icon/icon.component";
+import {LabelComponent} from "../../../atoms/label/label.component";
 
 @Component({
   selector: 'app-craft-resource',

@@ -6,7 +6,7 @@ const meta: Meta<InputComponent> = {
   parameters: {
     layout: 'centered',
   },
-  title: 'new/inputComponent',
+  title: 'Atoms/InputComponent',
 };
 export default meta;
 

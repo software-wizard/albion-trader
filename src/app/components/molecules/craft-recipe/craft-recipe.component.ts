@@ -1,7 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {CraftResourceRequirements} from '../../../data-types/albion-static-data';
-import {CraftResourceComponent} from "../craft-resource/craft-resource.component";
+import {CraftResourceComponent} from "./craft-resource/craft-resource.component";
 
 @Component({
   selector: 'app-recipe',
