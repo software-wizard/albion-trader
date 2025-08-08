@@ -12,13 +12,13 @@ export enum City {
   Bridgewatch = 'Bridgewatch',
   Lymhurst = 'Lymhurst',
   BlackMarket = 'Black Market',
-  Brecilien = 'Brecilien',
+  // Brecilien = 'Brecilien',
 }
 
 
 
 export const cityColors: Record<City, string> = {
-  [City.Brecilien]: '#8e9be8',
+  // [City.Brecilien]: '#8e9be8',
   [City.BlackMarket]: '#323232',
   [City.Thetford]: '#924b8c',
   [City.FortSterling]: '#e6e3e1',

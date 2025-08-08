@@ -14,16 +14,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have the 'albion-calc' title`, () => {
+  it(`should have the 'albion-trader' title`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('albion-calc');
+    expect(app.title).toEqual('albion-trader');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, albion-calc');
+    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, albion-trader');
   });
 });

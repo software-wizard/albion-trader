@@ -1,5 +1,5 @@
 {
-  "name": "albion-calc",
+  "name": "albion-trader",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -8,8 +8,8 @@
     "build": "ng build",
     "test": "ng test",
     "watch": "ng build --watch --configuration development",
-    "storybook": "ng run albion-calc:storybook",
-    "build-storybook": "ng run albion-calc:build-storybook"
+    "storybook": "ng run albion-trader:storybook",
+    "build-storybook": "ng run albion-trader:build-storybook"
   },
   "dependencies": {
     "@angular/animations": "^18.2.13",
@@ -32,6 +32,7 @@
     "@angular/compiler-cli": "^18.2.13",
     "@storybook/addon-docs": "^9.1.0",
     "@storybook/angular": "^9.1.0",
+    "@types/jest": "^30.0.0",
     "storybook": "^9.1.0",
     "typescript": "~5.5.4"
   }

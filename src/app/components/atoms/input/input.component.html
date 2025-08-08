@@ -1,0 +1,11 @@
+<div class="input-wrapper">
+    <input
+            type="text"
+            [(ngModel)]="inputText"
+            (blur)="onBlur()"
+    />
+    <div class="buttons">
+        <button (click)="increase()">▲</button>
+        <button (click)="decrease()">▼</button>
+    </div>
+</div>

@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
 import {City, cityColors, ItemQuality, PriceEntry, PriceType} from '../../../data-types/albion-price-data';
 import {CommonModule} from "@angular/common";
 import {MatTooltipModule} from '@angular/material/tooltip';
@@ -10,7 +10,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
   standalone: true,
   imports: [CommonModule, MatTooltipModule]
 })
-export class PriceDisplayComponent {
+export class PriceDisplayComponent implements OnChanges {
   @Input() data!: PriceEntry[];
   @Input() displayType!: PriceType;
   @Input() visibleQualities: ItemQuality[] = [
@@ -31,17 +31,23 @@ export class PriceDisplayComponent {
 
   readonly citiesOrder = [
     City.FortSterling,
-    City.Thetford,
-    City.Martlock,
-    City.Bridgewatch,
     City.Lymhurst,
+    City.Bridgewatch,
+    City.Martlock,
+    City.Thetford,
     City.BlackMarket,
-    City.Brecilien,
   ];
 
   protected readonly cityColors = cityColors;
+  parsedTable?: { quality: ItemQuality; values: { city: City; value: number; date: string | number; }[]; }[];
 
-  get table() {
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['data']) {
+      this.parsedTable = this.updateTable();
+    }
+  }
+
+  updateTable() {
     return this.qualities
       .filter(q => this.visibleQualities.includes(q))
       .map(quality => ({
@@ -54,5 +60,16 @@ export class PriceDisplayComponent {
           return {city, value, date};
         }),
       }));
+  }
+
+  getTableForSingleQuality(): { values: { city: City; value: number; date: string | number }[] }[] {
+    const flat = this.parsedTable!.flatMap(r => r.values);
+    const chunked: { city: City; value: number; date: string | number }[][] = [];
+
+    for (let i = 0; i < flat.length; i += 3) {
+      chunked.push(flat.slice(i, i + 3));
+    }
+
+    return chunked.map(chunk => ({ values: chunk }));
   }
 }

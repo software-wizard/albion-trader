@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "albion-calc": {
+    "albion-trader": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -15,11 +15,11 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:application",
+          "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/albion-calc",
+            "outputPath": "dist/albion-trader",
             "index": "src/index.html",
-            "browser": "src/main.ts",
+            "main": "src/main.ts",
             "polyfills": [
               "zone.js"
             ],
@@ -63,10 +63,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "albion-calc:build:production"
+              "buildTarget": "albion-trader:build:production"
             },
             "development": {
-              "buildTarget": "albion-calc:build:development"
+              "buildTarget": "albion-trader:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -74,7 +74,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "albion-calc:build"
+            "buildTarget": "albion-trader:build"
           }
         },
         "test": {
@@ -101,7 +101,7 @@
           "builder": "@storybook/angular:start-storybook",
           "options": {
             "configDir": ".storybook",
-            "browserTarget": "albion-calc:build",
+            "browserTarget": "albion-trader:build",
             "compodoc": false,
             "port": 6006
           }
@@ -110,7 +110,7 @@
           "builder": "@storybook/angular:build-storybook",
           "options": {
             "configDir": ".storybook",
-            "browserTarget": "albion-calc:build",
+            "browserTarget": "albion-trader:build",
             "compodoc": false,
             "outputDir": "storybook-static"
           }

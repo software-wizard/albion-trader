@@ -12,5 +12,5 @@ import {MainPageComponent} from "./pages/main-page/main-page.component";
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'albion-calc';
+  title = 'albion-trader';
 }
