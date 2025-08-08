@@ -1,14 +1,26 @@
 import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
 import {City, cityColors, ItemQuality, PriceEntry, PriceType} from '../../../data-types/albion-price-data';
-import {CommonModule} from "@angular/common";
+import {CommonModule} from '@angular/common';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {InputComponent} from "../../atoms/input/input.component.ts ";
+
+interface TableCell {
+  city: City;
+  value: number;
+  date: string | number;
+}
+
+interface QualityRow {
+  quality?: ItemQuality;
+  values: TableCell[];
+}
 
 @Component({
   selector: 'app-price-display',
   templateUrl: './price-display.component.html',
   styleUrls: ['./price-display.component.scss'],
   standalone: true,
-  imports: [CommonModule, MatTooltipModule]
+  imports: [CommonModule, MatTooltipModule, InputComponent]
 })
 export class PriceDisplayComponent implements OnChanges {
   @Input() data!: PriceEntry[];
@@ -39,15 +51,18 @@ export class PriceDisplayComponent implements OnChanges {
   ];
 
   protected readonly cityColors = cityColors;
-  parsedTable?: { quality: ItemQuality; values: { city: City; value: number; date: string | number; }[]; }[];
+  protected parsedTable?: QualityRow[];
+  protected singleQualityTable: QualityRow[] = [];
+  protected selectedCities: Record<number, City> = {};
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['data']) {
       this.parsedTable = this.updateTable();
+      this.singleQualityTable = this.computeSingleQualityTable();
     }
   }
 
-  updateTable() {
+  updateTable(): QualityRow[] {
     return this.qualities
       .filter(q => this.visibleQualities.includes(q))
       .map(quality => ({
@@ -62,14 +77,31 @@ export class PriceDisplayComponent implements OnChanges {
       }));
   }
 
-  getTableForSingleQuality(): { values: { city: City; value: number; date: string | number }[] }[] {
-    const flat = this.parsedTable!.flatMap(r => r.values);
-    const chunked: { city: City; value: number; date: string | number }[][] = [];
+  private computeSingleQualityTable(): QualityRow[] {
+    const flat = this.parsedTable?.flatMap(r => r.values) ?? [];
+    const chunked: TableCell[][] = [];
 
     for (let i = 0; i < flat.length; i += 3) {
       chunked.push(flat.slice(i, i + 3));
     }
 
-    return chunked.map(chunk => ({ values: chunk }));
+    return chunked.map(chunk => ({values: chunk}));
+  }
+
+  onCellClick(rowIndex: number, city: City): void {
+    this.selectedCities[rowIndex] = city;
+  }
+
+  getSelectionForRowIndex(i: number): number {
+    const city = this.selectedCities[i];
+
+    if (this.visibleQualities.length === 1) {
+      const flat = this.singleQualityTable.flatMap(r => r.values);
+      return flat.find(c => c.city === city)?.value ?? 0;
+    }
+
+    const row = this.parsedTable?.[i];
+    const cell = row?.values.find(c => c.city === city);
+    return cell?.value ?? 0;
   }
 }

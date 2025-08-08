@@ -13,17 +13,16 @@ export class InputComponent {
     @Input() value = 0;
     inputText = '';
 
-    ngOnInit(): void {
+    ngOnChanges(): void {
         this.syncInputText();
-    }
-
-    syncInputText(): void {
-        this.inputText = this.formatValue(this.value);
     }
 
     onBlur(): void {
-        this.value = this.parseValue(this.inputText);
-        this.syncInputText();
+        const parsed = this.parseValue(this.inputText);
+        if (parsed !== this.value) {
+            this.value = parsed;
+            this.syncInputText();
+        }
     }
 
     increase(): void {
@@ -36,24 +35,28 @@ export class InputComponent {
         this.syncInputText();
     }
 
+    private syncInputText(): void {
+        this.inputText = this.formatValue(this.value);
+    }
+
     private getVisibleDigitStep(val: number): number {
         if (val < 1_000) return 1;
-        if (val < 10_000) return 10; // 1.23k → 1.24k
-        if (val < 100_000) return 100; // 12.3k → 12.4k
-        if (val < 1_000_000) return 1_000; // 123k → 124k
-        if (val < 10_000_000) return 10_000; // 1.23m → 1.24m
-        if (val < 100_000_000) return 100_000; // 12.3m → 12.4m
-        return 1_000_000; // 123m → 124m
+        if (val < 10_000) return 10;
+        if (val < 100_000) return 100;
+        if (val < 1_000_000) return 1_000;
+        if (val < 10_000_000) return 10_000;
+        if (val < 100_000_000) return 100_000;
+        return 1_000_000;
     }
 
     private parseValue(str: string): number {
         const match = str.trim().toLowerCase().match(/^([\d.,]+)\s*([km]?)$/);
-        if (!match) return 0;
+        if (!match) return this.value;
 
         const num = parseFloat(match[1].replace(',', '.'));
         const unit = match[2];
 
-        if (isNaN(num)) return 0;
+        if (isNaN(num)) return this.value;
 
         switch (unit) {
             case 'k':
@@ -67,11 +70,9 @@ export class InputComponent {
 
     private formatValue(val: number): string {
         if (val < 1_000) return val.toString();
-
         if (val < 10_000) return (val / 1_000).toFixed(2).replace(/\.?0+$/, '') + 'k';
         if (val < 100_000) return (val / 1_000).toFixed(1).replace(/\.?0+$/, '') + 'k';
         if (val < 1_000_000) return Math.round(val / 1_000) + 'k';
-
         if (val < 10_000_000) return (val / 1_000_000).toFixed(2).replace(/\.?0+$/, '') + 'm';
         if (val < 100_000_000) return (val / 1_000_000).toFixed(1).replace(/\.?0+$/, '') + 'm';
         return Math.round(val / 1_000_000) + 'm';

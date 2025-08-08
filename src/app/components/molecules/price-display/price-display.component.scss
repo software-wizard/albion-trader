@@ -1,30 +1,43 @@
 .wrapper {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+}
+
+.table-and-input {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.rows {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .row {
   display: flex;
-  gap: 4px;
+  flex-direction: row;
+  gap: 0.5rem;
   align-items: center;
 }
 
 .cell {
+  min-width: 4rem;
+  padding: 0.3rem 0.6rem;
   text-align: center;
-  padding: 4px 8px;
-  font-variant-numeric: tabular-nums;
-  min-width: 60px;
-  border-radius: 6px;
+  border: 0.1rem solid #ccc;
+  border-radius: 0.3rem;
+  cursor: pointer;
 }
 
-.label-cell {
+.cell.selected {
+  outline: 0.2rem solid #222;
+  outline-offset: -0.2rem;
   font-weight: bold;
-  min-width: 120px;
 }
 
-.header-cell {
-  font-weight: bold;
-  background: #f0f0f0;
-  border-radius: 6px;
+.single-input {
+  align-self: flex-start;
 }
