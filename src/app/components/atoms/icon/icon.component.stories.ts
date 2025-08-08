@@ -11,7 +11,7 @@ const meta: Meta<IconComponent> = {
 export default meta;
 type Story = StoryObj<IconComponent>;
 
-export const Primary: Story = {
+export const Default: Story = {
   args: {
     itemName: 'T4_MAIN_AXE'
   },

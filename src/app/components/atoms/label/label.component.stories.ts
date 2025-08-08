@@ -11,7 +11,7 @@ const meta: Meta<LabelComponent> = {
 export default meta;
 type Story = StoryObj<LabelComponent>;
 
-export const Primary: Story = {
+export const Default: Story = {
   args: {
     label: 'abc'
   },

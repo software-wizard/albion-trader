@@ -1,4 +1,6 @@
 <div class='craft-resource-wrapper'>
-  <app-icon [itemName]="craftResource.uniquename" />
-  <app-label [label]="'×' + craftResource.count" />
+  <app-icon [itemName]="craftResource.uniquename"/>
+  <app-label [label]="'×' + craftResource.count"/>
+  <app-price-display [visibleQualities]="[ItemQuality.Normal]" [prices]="resourcePrices"
+                     [displayType]="PriceType.SellMin"/>
 </div>

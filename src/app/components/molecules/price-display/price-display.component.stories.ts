@@ -22,7 +22,7 @@ type Story = StoryObj<PriceDisplayComponent>;
 
 export const Weapons: Story = {
   args: {
-    data: data as PriceEntry[],
+    prices: data as PriceEntry[],
     displayType: PriceType.SellMin,
   },
 };
@@ -30,7 +30,7 @@ export const Weapons: Story = {
 export const Resources: Story = {
   args: {
     visibleQualities: [ItemQuality.Normal],
-    data: data2 as PriceEntry[],
+    prices: data2 as PriceEntry[],
     displayType: PriceType.SellMin,
   },
 };

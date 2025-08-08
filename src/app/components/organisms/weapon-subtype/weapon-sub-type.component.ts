@@ -4,7 +4,7 @@ import {Weapon} from '../../../data-types/albion-static-data';
 import {CraftRecipeComponent} from "../../molecules/craft-recipe/craft-recipe.component";
 import {IconComponent} from "../../atoms/icon/icon.component";
 import {SeparatorComponent} from "../../atoms/separator/separator.component";
-import {EnchantRecipeComponent} from "../../molecules/weapon/enchant-recipe/enchant-recipe.component";
+import {EnchantRecipeComponent} from "./enchant-recipe/enchant-recipe.component";
 
 @Component({
   selector: 'app-weapon',

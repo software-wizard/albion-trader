@@ -3,7 +3,7 @@ import { WeaponComponent } from './weapon.component';
 import { CommonModule } from '@angular/common';
 
 export default {
-  title: 'Molecules/WeaponComponent',
+  title: 'Organisms/WeaponSubTypeComponent/WeaponSubTypeComponent',
   component: WeaponComponent,
   parameters: {
     layout: 'centered',

@@ -23,7 +23,7 @@ interface QualityRow {
   imports: [CommonModule, MatTooltipModule, InputComponent]
 })
 export class PriceDisplayComponent implements OnChanges {
-  @Input() data!: PriceEntry[];
+  @Input() prices!: PriceEntry[];
   @Input() displayType!: PriceType;
   @Input() visibleQualities: ItemQuality[] = [
     ItemQuality.Normal,
@@ -56,7 +56,7 @@ export class PriceDisplayComponent implements OnChanges {
   protected selectedCities: Record<number, City> = {};
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['data']) {
+    if (changes['prices']) {
       this.parsedTable = this.updateTable();
       this.singleQualityTable = this.computeSingleQualityTable();
     }
@@ -68,7 +68,7 @@ export class PriceDisplayComponent implements OnChanges {
       .map(quality => ({
         quality,
         values: this.citiesOrder.map(city => {
-          const entry = this.data.find(d => d.city === city && d.quality === quality);
+          const entry = this.prices.find(d => d.city === city && d.quality === quality);
           const value = entry?.[this.displayType] ?? 0;
           const dateKey = (this.displayType + '_date') as keyof PriceEntry;
           const date = entry?.[dateKey] ?? '';

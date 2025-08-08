@@ -3,7 +3,7 @@ import {EnchantRecipeComponent} from './enchant-recipe.component';
 import {CommonModule} from '@angular/common';
 
 export default {
-  title: 'Molecules/EnchantRecipeComponent',
+  title: 'Organisms/WeaponSubTypeComponent/EnchantRecipeComponent',
   component: EnchantRecipeComponent,
   parameters: {
     layout: 'centered',

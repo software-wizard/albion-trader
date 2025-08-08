@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {CraftRecipeComponent} from "../../craft-recipe/craft-recipe.component";
+import {CraftRecipeComponent} from "../../../molecules/craft-recipe/craft-recipe.component";
 import {EnchantmentEntry} from "../../../../data-types/albion-static-data";
 
 @Component({
