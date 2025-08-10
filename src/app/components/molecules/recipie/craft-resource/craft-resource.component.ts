@@ -24,7 +24,6 @@ export class CraftResourceComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['craftResource']?.currentValue?.uniquename) {
-      console.log(this.craftResource.uniquename)
       this.pricesService.getPrices(this.craftResource.uniquename)
         .subscribe(prices => this.resourcePrices = prices);
     }

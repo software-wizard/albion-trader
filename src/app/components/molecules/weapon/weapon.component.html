@@ -1,16 +1,24 @@
-<hr/>
-<div>
-  <app-icon [itemName]="weapon.uniquename"/>
-  <div>{{ weapon.uniquename }}</div>
+<hr />
+<div class="header">
+  <app-icon [itemName]="weapon.uniquename"></app-icon>
+  <div class="name">{{ weapon.uniquename }}</div>
 </div>
 
-<div *ngFor="let flatCraft of weapon.craftingrequirements; let i = index">
+<div class="row" *ngFor="let flatCraft of weapon.craftingrequirements; let i = index">
   <app-recipe [craftingrequirement]="flatCraft"></app-recipe>
+  <app-price-display
+    [displayType]="PriceType.SellMin"
+    [prices]="weaponPrices.get(weapon.uniquename) || []">
+  </app-price-display>
 </div>
 
 <div *ngFor="let enchantCraft of weapon.enchantments.enchantment; let i = index">
-  <app-separator/>
-  <app-enchant-recipe [enchant]="enchantCraft"></app-enchant-recipe>
+  <app-separator></app-separator>
+  <div class="row">
+    <app-enchant-recipe [enchant]="enchantCraft"></app-enchant-recipe>
+    <app-price-display
+      [displayType]="PriceType.SellMin"
+      [prices]="weaponPrices.get(weapon.uniquename + '@' + enchantCraft.enchantmentlevel) || []">
+    </app-price-display>
+  </div>
 </div>
-
-

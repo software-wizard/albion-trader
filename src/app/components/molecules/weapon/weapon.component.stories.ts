@@ -56,7 +56,7 @@ export default {
           useValue: {
             getPrices: (name: string) => {
               name = PriceService.internalToApiId(name);
-              console.log(name)
+              console.log(`getPrices ${name}`)
               if (name === 'T4_PLANKS_LEVEL1@1') return of(plankData);
               if (name === 'T4_METALBAR_LEVEL1@1') return of(metalbarData);
               if (name === 'T4_MAIN_AXE@1') return of(mainAxeData);

@@ -18,15 +18,11 @@ export class PriceService {
 
 
   static internalToApiId(id: string): string {
-    const regex = /^([a-z_]+)_(\\d)(?:_level(\\d+))?$/i
-    const m = regex.exec(id);
-    if (!m) return id;
-    const base = BASE_MAP[m[1]];
-    if (!base) return id;
-    const tier = `T${m[2]}`;
-    const level = m[3] ? Number(m[3]) : 0;
-    if (level > 0) return `${tier}_${base}_LEVEL${level}@${level}`;
-    return `${tier}_${base}`;
+    if (/(?:^|_)(?:METALBAR|PLANKS)(?:_|$)/.test(id) && !/@\d+$/.test(id)) {
+      const m = id.match(/_LEVEL(\d+)/);
+      if (m) return id + '@' + m[1];
+    }
+    return id;
   }
 
   getPrices(uniqueName: string): Observable<PriceEntry[]> {
