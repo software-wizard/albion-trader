@@ -33,7 +33,13 @@
               "@angular/material/prebuilt-themes/azure-blue.css",
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "optimization": false,
+            "sourceMap": {
+              "scripts": true,
+              "styles": true,
+              "vendor": true
+            }
           },
           "configurations": {
             "production": {
@@ -49,12 +55,18 @@
                   "maximumError": "4kb"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "optimization": true,
+              "sourceMap": false
             },
             "development": {
               "optimization": false,
               "extractLicenses": false,
-              "sourceMap": true
+              "sourceMap": {
+                "scripts": true,
+                "styles": true,
+                "vendor": true
+              }
             }
           },
           "defaultConfiguration": "production"
@@ -101,7 +113,7 @@
           "builder": "@storybook/angular:start-storybook",
           "options": {
             "configDir": ".storybook",
-            "browserTarget": "albion-trader:build",
+            "browserTarget": "albion-trader:build:development",
             "compodoc": false,
             "port": 6006
           }
@@ -110,7 +122,7 @@
           "builder": "@storybook/angular:build-storybook",
           "options": {
             "configDir": ".storybook",
-            "browserTarget": "albion-trader:build",
+            "browserTarget": "albion-trader:build:development",
             "compodoc": false,
             "outputDir": "storybook-static"
           }

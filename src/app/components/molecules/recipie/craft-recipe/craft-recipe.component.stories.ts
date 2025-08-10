@@ -4,7 +4,7 @@ import { of } from 'rxjs';
 import { CraftRecipeComponent } from './craft-recipe.component';
 import metalbarData from '../t41-metal-bar-mock.json';
 import plankData from '../t41-plank-mock.json';
-import {PricesService} from "../../../../services/price-service";
+import {PriceService} from "../../../../services/price-service";
 import {PriceEntry} from "../../../../data-types/albion-price-data";
 
 export default {
@@ -17,7 +17,7 @@ export default {
     applicationConfig({
       providers: [
         {
-          provide: PricesService,
+          provide: PriceService,
           useValue: {
             getPrices: (name: string) => {
               if (name === 'T4_PLANKS_LEVEL1@1') return of(plankData as PriceEntry[]);

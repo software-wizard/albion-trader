@@ -5,7 +5,7 @@ import {IconComponent} from "../../../atoms/icon/icon.component";
 import {LabelComponent} from "../../../atoms/label/label.component";
 import {PriceDisplayComponent} from "../../price-display/price-display.component";
 import {ItemQuality, PriceEntry, PriceType} from "../../../../data-types/albion-price-data";
-import {PricesService} from "../../../../services/price-service";
+import {PriceService} from "../../../../services/price-service";
 
 @Component({
   selector: 'app-craft-resource',
@@ -20,10 +20,11 @@ export class CraftResourceComponent implements OnChanges {
   protected readonly ItemQuality = ItemQuality;
   protected readonly PriceType = PriceType;
 
-  constructor(private pricesService: PricesService) {}
+  constructor(private pricesService: PriceService) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['craftResource']?.currentValue?.uniquename) {
+      console.log(this.craftResource.uniquename)
       this.pricesService.getPrices(this.craftResource.uniquename)
         .subscribe(prices => this.resourcePrices = prices);
     }

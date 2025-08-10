@@ -33,7 +33,10 @@
     "@storybook/addon-docs": "^9.1.0",
     "@storybook/angular": "^9.1.0",
     "@types/jest": "^30.0.0",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
     "storybook": "^9.1.0",
+    "ts-jest": "^29.4.1",
     "typescript": "~5.5.4"
   }
 }

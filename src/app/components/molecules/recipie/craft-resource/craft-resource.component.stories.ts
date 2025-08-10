@@ -4,7 +4,7 @@ import {CraftResourceComponent} from './craft-resource.component';
 import {PriceEntry} from '../../../../data-types/albion-price-data';
 import data from '../t41-metal-bar-mock.json';
 import {of} from 'rxjs';
-import {PricesService} from "../../../../services/price-service";
+import {PriceService} from "../../../../services/price-service";
 
 export default {
   title: 'molecules/CraftRecipes/CraftResourceComponent',
@@ -14,7 +14,7 @@ export default {
     applicationConfig({
       providers: [
         {
-          provide: PricesService,
+          provide: PriceService,
           useValue: {
             getPrices: (name: string) =>
               of((data as PriceEntry[]).filter(e => e.item_id === name))

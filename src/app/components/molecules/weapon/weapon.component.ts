@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {CraftRecipeComponent} from "../recipie/craft-recipe/craft-recipe.component";
 import {IconComponent} from "../../atoms/icon/icon.component";
@@ -12,6 +12,12 @@ import {EnchantRecipeComponent} from "../recipie/enchant-recipe/enchant-recipe.c
   imports: [CommonModule, CraftRecipeComponent, IconComponent, SeparatorComponent, EnchantRecipeComponent],
   templateUrl: './weapon.component.html',
 })
-export class WeaponComponent {
+export class WeaponComponent implements OnChanges {
   @Input() weapon!: Weapon;
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['weapon']?.currentValue) {
+      console.log(this.weapon)
+    }
+  }
 }
