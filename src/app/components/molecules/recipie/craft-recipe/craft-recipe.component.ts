@@ -1,7 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {CraftResourceRequirements} from '../../../data-types/albion-static-data';
-import {CraftResourceComponent} from "./craft-resource/craft-resource.component";
+import {CraftResourceComponent} from "../craft-resource/craft-resource.component";
+import {CraftingRequirements} from "../../../../../assets/albion-static-data";
 
 @Component({
   selector: 'app-recipe',
@@ -11,5 +11,5 @@ import {CraftResourceComponent} from "./craft-resource/craft-resource.component"
   styleUrls: ['./craft-recipe.component.scss']
 })
 export class CraftRecipeComponent {
-  @Input() craftingrequirement!: CraftResourceRequirements;
+  @Input() craftingrequirement!: CraftingRequirements;
 }

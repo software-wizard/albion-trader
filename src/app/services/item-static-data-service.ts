@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {map, Observable} from 'rxjs';
-import {AlbionStaticData} from "../data-types/albion-static-data";
+import {AlbionStaticData} from "../../assets/albion-static-data";
 
 @Injectable({providedIn: 'root'})
 export class AlbionItemsService {
@@ -16,6 +16,8 @@ export class AlbionItemsService {
       }))
   };
 
+  //usunięcie @
+  //Wymuszenie tablic dla: craftingrequirements, craftresource, upgraderesource, enchantment gdy były pojedynczym obiektem.
   normalizeKeys(obj: any): any {
     if (Array.isArray(obj)) {
       return obj.map(e => this.normalizeKeys(e));

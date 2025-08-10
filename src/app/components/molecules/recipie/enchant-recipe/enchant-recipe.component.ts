@@ -1,7 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {CraftRecipeComponent} from "../../../molecules/craft-recipe/craft-recipe.component";
-import {EnchantmentEntry} from "../../../../data-types/albion-static-data";
+import {CraftRecipeComponent} from "../craft-recipe/craft-recipe.component";
+import {Enchantment} from "../../../../../assets/albion-static-data";
 
 @Component({
   selector: 'app-enchant-recipe',
@@ -10,5 +10,5 @@ import {EnchantmentEntry} from "../../../../data-types/albion-static-data";
   templateUrl: './enchant-recipe.component.html',
 })
 export class EnchantRecipeComponent {
-  @Input() enchant!: EnchantmentEntry;
+  @Input() enchant!: Enchantment;
 }

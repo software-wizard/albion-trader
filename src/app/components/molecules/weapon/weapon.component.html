@@ -8,7 +8,9 @@
   <app-recipe [craftingrequirement]="flatCraft"></app-recipe>
 </div>
 
-<div *ngFor="let enchantCraft of weapon.enchantments?.enchantment; let i = index">
+<div *ngFor="let enchantCraft of weapon.enchantments.enchantment; let i = index">
   <app-separator/>
-  <app-enchant-recipe [enchant]=enchantCraft></app-enchant-recipe>
+  <app-enchant-recipe [enchant]="enchantCraft"></app-enchant-recipe>
 </div>
+
+

@@ -1,6 +1,6 @@
 import {Meta, moduleMetadata, StoryObj} from '@storybook/angular';
 import {PriceDisplayComponent} from './price-display.component';
-import data from './t41-battle-axe-mock.json';
+import data from './t41-main-axe-mock.json';
 import data2 from './t41-ore-mock.json';
 import {ItemQuality, PriceEntry, PriceType} from "../../../data-types/albion-price-data";
 import {CommonModule} from "@angular/common";

@@ -11,6 +11,7 @@ const config: StorybookConfig = {
   core: {
     builder: '@storybook/builder-webpack5'
   },
+  staticDirs: [{ from: '../src/assets', to: '/assets' }],
   webpackFinal: async (config) => {
     config.devtool = 'source-map';
 

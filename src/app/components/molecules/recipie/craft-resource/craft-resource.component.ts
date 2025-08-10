@@ -1,10 +1,11 @@
-import { Component, Input } from '@angular/core';
+import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {CraftResource} from "../../../../data-types/albion-static-data";
+import {CraftResource} from "../../../../../assets/albion-static-data";
 import {IconComponent} from "../../../atoms/icon/icon.component";
 import {LabelComponent} from "../../../atoms/label/label.component";
 import {PriceDisplayComponent} from "../../price-display/price-display.component";
 import {ItemQuality, PriceEntry, PriceType} from "../../../../data-types/albion-price-data";
+import {PricesService} from "../../../../services/price-service";
 
 @Component({
   selector: 'app-craft-resource',
@@ -13,9 +14,18 @@ import {ItemQuality, PriceEntry, PriceType} from "../../../../data-types/albion-
   templateUrl: './craft-resource.component.html',
   styleUrls: ['./craft-resource.component.scss']
 })
-export class CraftResourceComponent {
+export class CraftResourceComponent implements OnChanges {
   @Input() craftResource!: CraftResource;
-  @Input() resourcePrices!: PriceEntry[];
+  resourcePrices: PriceEntry[] = [];
   protected readonly ItemQuality = ItemQuality;
   protected readonly PriceType = PriceType;
+
+  constructor(private pricesService: PricesService) {}
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['craftResource']?.currentValue?.uniquename) {
+      this.pricesService.getPrices(this.craftResource.uniquename)
+        .subscribe(prices => this.resourcePrices = prices);
+    }
+  }
 }

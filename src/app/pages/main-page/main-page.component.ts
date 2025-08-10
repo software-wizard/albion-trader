@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {firstValueFrom} from 'rxjs';
 import {AlbionItemsService} from "../../services/item-static-data-service";
-import {AlbionStaticData, Weapon} from "../../data-types/albion-static-data";
+import {AlbionStaticData, Weapon} from "../../../assets/albion-static-data";
 import {WeaponComponent} from "../../components/molecules/weapon/weapon.component";
 
 @Component({
