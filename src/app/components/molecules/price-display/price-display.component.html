@@ -10,10 +10,6 @@
              (click)="onCellClick(visibleQualities.length === 1 ? 0 : i, cell.city)">
           {{ cell.value }}
         </div>
-
-        <app-input *ngIf="visibleQualities.length !== 1"
-                   [(value)]="inputValues[i]">
-        </app-input>
       </div>
     </div>
   </div>

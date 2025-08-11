@@ -22,4 +22,12 @@ export class CraftRecipeComponent implements OnChanges {
       }
     }
   }
+
+  getResourcesPrice() {
+    let buffer = 0;
+    for (let i = 0; i < this.craftingrequirement.craftresource.length; i++) {
+      buffer += parseInt(this.craftingrequirement.craftresource[i].count) * this.resourcesPrice[i]();
+    }
+    return buffer;
+  }
 }
