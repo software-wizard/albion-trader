@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
+import {Component, Input, OnChanges, SimpleChanges, WritableSignal} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {CraftResource} from "../../../../../assets/albion-static-data";
 import {IconComponent} from "../../../atoms/icon/icon.component";
@@ -16,6 +16,7 @@ import {PriceService} from "../../../../services/price-service";
 })
 export class CraftResourceComponent implements OnChanges {
   @Input() craftResource!: CraftResource;
+  @Input() resourcePrice!: WritableSignal<number>
   resourcePrices: PriceEntry[] = [];
   protected readonly ItemQuality = ItemQuality;
   protected readonly PriceType = PriceType;

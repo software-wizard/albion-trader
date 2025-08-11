@@ -1,9 +1,8 @@
-import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
+import {Component, Input, OnChanges, SimpleChanges, WritableSignal} from '@angular/core';
 import {City, cityColors, ItemQuality, PriceEntry, PriceType} from '../../../data-types/albion-price-data';
 import {CommonModule} from '@angular/common';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {InputComponent} from "../../atoms/input/input.component";
-import {LabelComponent} from "../../atoms/label/label.component";
 
 interface TableCell {
   city: City;
@@ -19,14 +18,13 @@ interface QualityRow {
 @Component({
   selector: 'app-price-display',
   standalone: true,
-  imports: [CommonModule, MatTooltipModule, InputComponent, LabelComponent, InputComponent],
+  imports: [CommonModule, MatTooltipModule, InputComponent, InputComponent],
   templateUrl: './price-display.component.html',
   styleUrls: ['./price-display.component.scss']
 })
 export class PriceDisplayComponent implements OnChanges {
   @Input() prices!: PriceEntry[];
   @Input() displayType!: PriceType;
-  @Input() itemAmount = 1;
 
   @Input() visibleQualities: ItemQuality[] = [
     ItemQuality.Normal, ItemQuality.Good, ItemQuality.Outstanding, ItemQuality.Excellent, ItemQuality.Masterpiece,
@@ -45,6 +43,7 @@ export class PriceDisplayComponent implements OnChanges {
   protected singleQualityTable: QualityRow[] = [];
   protected selectedCities: Record<number, City> = {};
   inputValues: Record<number, number> = {};
+  @Input() resourcePrice!: WritableSignal<number>;
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['prices'] || changes['visibleQualities'] || changes['displayType']) {
@@ -79,11 +78,14 @@ export class PriceDisplayComponent implements OnChanges {
   onCellClick(rowIndex: number, city: City): void {
     this.selectedCities[rowIndex] = city;
     this.inputValues[rowIndex] = this.computeSelectedCellValue(rowIndex);
+    this.resourcePrice.set(this.inputValues[rowIndex])
   }
 
   private initInputs(): void {
     if (this.visibleQualities.length === 1) {
-      if (this.inputValues[0] == null) this.inputValues[0] = this.computeSelectedCellValue(0);
+      if (this.inputValues[0] == null) {
+        this.inputValues[0] = this.computeSelectedCellValue(0);
+      }
     } else {
       const rows = this.parsedTable?.length ?? 0;
       for (let i = 0; i < rows; i++) {
