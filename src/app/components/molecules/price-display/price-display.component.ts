@@ -41,6 +41,7 @@ export class PriceDisplayComponent implements OnChanges {
     if (changes['prices']) {
       this.parsedTable = this.updateTable();
       this.singleQualityTable = this.computeSingleQualityTable();
+      this.initInputs();
     }
   }
 
@@ -62,6 +63,22 @@ export class PriceDisplayComponent implements OnChanges {
   onCellClick(rowIndex: number, city: City): void {
     this.selectedCities[rowIndex] = city;
     this.inputValues[rowIndex] = this.computeSelectedCellValue(rowIndex);
+  }
+
+  private initInputs(): void {
+    if (this.visibleQualities.length === 1) {
+      if (this.inputValues[0] == null) this.inputValues[0] = this.computeSelectedCellValue(0);
+    } else {
+      const rows = this.parsedTable?.length ?? 0;
+      for (let i = 0; i < rows; i++) {
+        if (this.inputValues[i] == null) this.inputValues[i] = this.computeSelectedCellValue(i);
+      }
+    }
+  }
+
+  getValueForRow(index: number): number {
+    const v = this.inputValues[index] ?? 0;
+    return v * this.itemAmount;
   }
 
   private computeSingleQualityTable(): QualityRow[] {

@@ -12,17 +12,19 @@
         </div>
 
         <app-input *ngIf="visibleQualities.length !== 1"
-                   [(value)]="inputValues[i]"
-                   [value]="inputValues[i] ?? computeSelectedCellValue(i)">
+                   [(value)]="inputValues[i]">
         </app-input>
+        <app-label *ngIf="visibleQualities.length !== 1"
+                   [label]="(getValueForRow(i).toString())"></app-label>
       </div>
     </div>
 
     <app-input *ngIf="visibleQualities.length === 1"
                [(value)]="inputValues[0]"
-               [value]="inputValues[0] ?? computeSelectedCellValue(0)"
                class="single-input">
     </app-input>
-    <app-label [label]="(((inputValues[0] ?? 0) * (+itemAmount || 0))).toString()"></app-label>
+    <app-label *ngIf="visibleQualities.length == 1"
+               [label]="(getValueForRow(0).toString())"></app-label>
+
   </div>
 </div>
