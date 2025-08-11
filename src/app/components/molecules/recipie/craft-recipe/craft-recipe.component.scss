@@ -1,5 +1,18 @@
-.craft-recipe-wrapper
-{
+.craft-recipe-wrapper {
+  display: flex;
+  align-items: stretch;
+  gap: 16px;
+}
+.recipes-col {
   display: flex;
   flex-direction: column;
+  gap: 8px;
+  flex: 1 1 auto;
+}
+.recipes-wrapper {
+  display: flex;
+  flex-direction: row;
+}
+.summary {
+  align-self: center;
 }

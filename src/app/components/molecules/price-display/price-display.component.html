@@ -18,12 +18,12 @@
     </div>
 
     <div class="wrapper">
-      <app-input *ngIf="visibleQualities.length === 1"
-                 [(value)]="inputValues[0]"
-      >
-      </app-input>
       <app-input *ngIf="visibleQualities.length === 1" [displayOnly]="true"
                  [value]="inputValues[0]*itemAmount"
+      >
+      </app-input>
+      <app-input *ngIf="visibleQualities.length === 1"
+                 [(value)]="inputValues[0]"
       >
       </app-input>
     </div>

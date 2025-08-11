@@ -1,5 +1,8 @@
-<div class='craft-recipe-wrapper'>
-  <div *ngFor="let res of craftingrequirement.craftresource">
-    <app-craft-resource [craftResource]="res" ></app-craft-resource>
+<div class="craft-recipe-wrapper">
+  <div class="recipes-col">
+    <div class="recipes-wrapper" *ngFor="let res of craftingrequirement.craftresource">
+      <app-craft-resource [craftResource]="res"></app-craft-resource>
+    </div>
   </div>
+  <app-input class="summary" [displayOnly]="true" [value]="123"></app-input>
 </div>

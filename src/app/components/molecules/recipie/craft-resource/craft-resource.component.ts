@@ -28,4 +28,6 @@ export class CraftResourceComponent implements OnChanges {
         .subscribe(prices => this.resourcePrices = prices);
     }
   }
+
+  protected readonly parseInt = parseInt;
 }
