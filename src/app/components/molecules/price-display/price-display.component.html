@@ -14,17 +14,18 @@
         <app-input *ngIf="visibleQualities.length !== 1"
                    [(value)]="inputValues[i]">
         </app-input>
-        <app-label *ngIf="visibleQualities.length !== 1"
-                   [label]="(getValueForRow(i).toString())"></app-label>
       </div>
     </div>
 
-    <app-input *ngIf="visibleQualities.length === 1"
-               [(value)]="inputValues[0]"
-               class="single-input">
-    </app-input>
-    <app-label *ngIf="visibleQualities.length == 1"
-               [label]="(getValueForRow(0).toString())"></app-label>
-
+    <div class="wrapper">
+      <app-input *ngIf="visibleQualities.length === 1"
+                 [(value)]="inputValues[0]"
+      >
+      </app-input>
+      <app-input *ngIf="visibleQualities.length === 1" [displayOnly]="true"
+                 [value]="inputValues[0]*itemAmount"
+      >
+      </app-input>
+    </div>
   </div>
 </div>

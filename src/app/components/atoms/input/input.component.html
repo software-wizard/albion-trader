@@ -1,12 +1,12 @@
 <div class="input-wrapper">
-    <input
-            type="text"
-            [(ngModel)]="inputText"
-            (ngModelChange)="onInputChange($event)"
-            (blur)="onBlur()"
-    />
-    <div class="buttons">
-        <button (click)="increase()">▲</button>
-        <button (click)="decrease()">▼</button>
-    </div>
+  <input
+    type="text"
+    [value]="formatValue(value())"
+    [readOnly]="displayOnly"
+    (blur)="onBlur($event)"
+  />
+  <div class="buttons" *ngIf="!displayOnly">
+    <button type="button" (click)="increase()">▲</button>
+    <button type="button" (click)="decrease()">▼</button>
+  </div>
 </div>
