@@ -1,23 +1,28 @@
 <div class="wrapper" *ngIf="parsedTable?.length">
   <div class="table-and-input">
     <div class="rows">
-      <div
-        class="row"
-        *ngFor="let row of visibleQualities.length === 1 ? singleQualityTable : parsedTable; let i = index"
-      >
-        <div
-          class="cell"
-          *ngFor="let cell of row.values"
-          [ngStyle]="{ 'background-color': cityColors[cell.city] }"
-          [class.selected]="selectedCities[visibleQualities.length === 1 ? 0 : i] === cell.city"
-          (click)="onCellClick(visibleQualities.length === 1 ? 0 : i, cell.city)"
-        >
+      <div class="row"
+           *ngFor="let row of visibleQualities.length === 1 ? singleQualityTable : parsedTable; let i = index">
+        <div class="cell"
+             *ngFor="let cell of row.values"
+             [ngStyle]="{ 'background-color': cityColors[cell.city] }"
+             [class.selected]="selectedCities[visibleQualities.length === 1 ? 0 : i] === cell.city"
+             (click)="onCellClick(visibleQualities.length === 1 ? 0 : i, cell.city)">
           {{ cell.value }}
         </div>
 
-        <app-input *ngIf="visibleQualities.length !== 1" [value]="getSelectionForRowIndex(i)"></app-input>
+        <app-input *ngIf="visibleQualities.length !== 1"
+                   [(value)]="inputValues[i]"
+                   [value]="inputValues[i] ?? computeSelectedCellValue(i)">
+        </app-input>
       </div>
     </div>
-    <app-input *ngIf="visibleQualities.length === 1" [value]="getSelectionForRowIndex(0)" class="single-input"/>
+
+    <app-input *ngIf="visibleQualities.length === 1"
+               [(value)]="inputValues[0]"
+               [value]="inputValues[0] ?? computeSelectedCellValue(0)"
+               class="single-input">
+    </app-input>
+    <app-label [label]="(((inputValues[0] ?? 0) * (+itemAmount || 0))).toString()"></app-label>
   </div>
 </div>
