@@ -10,6 +10,7 @@
     [displayType]="PriceType.SellMin"
     [prices]="weaponPrices.get(weapon.uniquename) || []">
   </app-price-display>
+  <app-input [value]="123"/>
 </div>
 
 <div *ngFor="let enchantCraft of weapon.enchantments.enchantment; let i = index">
@@ -20,5 +21,6 @@
       [displayType]="PriceType.SellMin"
       [prices]="weaponPrices.get(weapon.uniquename + '@' + enchantCraft.enchantmentlevel) || []">
     </app-price-display>
+    <app-input [value]="345"/>
   </div>
 </div>

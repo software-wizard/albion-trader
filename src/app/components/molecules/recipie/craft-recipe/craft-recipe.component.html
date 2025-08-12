@@ -7,7 +7,7 @@
       />
       <div class="recipes-col">
         <app-input [displayOnly]="true" [value]="resourcesPrice[i]() * craftingrequirement.craftresource[i].count"/>
-        <app-input [value]="resourcesPrice[i]()"/>
+        <app-input [value]="resourcesPrice[i]()" (valueChange)="priceChangedManually(i, $event)"/>
       </div>
     </div>
   </div>

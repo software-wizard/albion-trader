@@ -30,4 +30,8 @@ export class CraftRecipeComponent implements OnChanges {
     }
     return buffer;
   }
+
+  priceChangedManually(index: number, $event: number) {
+    this.resourcesPrice[index].set($event);
+  }
 }

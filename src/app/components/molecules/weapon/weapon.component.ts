@@ -8,11 +8,12 @@ import {EnchantRecipeComponent} from "../recipie/enchant-recipe/enchant-recipe.c
 import {PriceService} from "../../../services/price-service";
 import {PriceEntry, PriceType} from "../../../data-types/albion-price-data";
 import {PriceDisplayComponent} from "../price-display/price-display.component";
+import {InputComponent} from "../../atoms/input/input.component";
 
 @Component({
   selector: 'app-weapon',
   standalone: true,
-  imports: [CommonModule, CraftRecipeComponent, IconComponent, SeparatorComponent, EnchantRecipeComponent, PriceDisplayComponent],
+  imports: [CommonModule, CraftRecipeComponent, IconComponent, SeparatorComponent, EnchantRecipeComponent, PriceDisplayComponent, InputComponent],
   templateUrl: './weapon.component.html',
   styleUrls: ['./weapon.component.scss']
 })
