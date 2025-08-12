@@ -1,16 +1,12 @@
-<div class="wrapper" *ngIf="parsedTable?.length">
-  <div class="table-and-input">
-    <div class="rows">
-      <div class="row"
-           *ngFor="let row of visibleQualities.length === 1 ? singleQualityTable : parsedTable; let i = index">
-        <div class="cell"
-             *ngFor="let cell of row.values"
-             [ngStyle]="{ 'background-color': cityColors[cell.city] }"
-             [class.selected]="selectedCities[visibleQualities.length === 1 ? 0 : i] === cell.city"
-             (click)="onCellClick(visibleQualities.length === 1 ? 0 : i, cell.city)">
-          {{ cell.value }}
-        </div>
+<div class="table-and-input">
+  <div class="row">
+    @for (cell of cities; track cell.city; ) {
+      <div class="cell"
+           [ngStyle]="{ 'background-color': cityColors[cell.city] }"
+           [class.selected]="selectedCity === cell.city"
+           (click)="onCellClick(cell.city)">
+        {{ cell.price }}
       </div>
-    </div>
+    }
   </div>
 </div>

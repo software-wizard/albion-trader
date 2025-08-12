@@ -10,6 +10,12 @@
   gap: 1rem;
 }
 
+.rows {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
 .row {
   display: flex;
   flex-direction: row;
