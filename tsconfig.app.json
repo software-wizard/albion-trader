@@ -4,6 +4,7 @@
   "compilerOptions": {
     "sourceMap": true,
     "inlineSources": true,
+    "useDefineForClassFields": false,
     "outDir": "./out-tsc/app",
     "types": [
       "node"

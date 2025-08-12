@@ -1,0 +1,121 @@
+export interface AlbionStaticData {
+  // shopcategories: Shopcategories;
+  // hideoutitem: Hideoutitem;
+  // trackingitem: Trackingitem[];
+  // farmableitem: Farmableitem[];
+  // simpleitem: Simpleitem[];
+  // consumableitem: Consumableitem[];
+  // rewardtoken: Rewardtoken;
+  // consumablefrominventoryitem: Consumablefrominventoryitem[];
+  // trashitem: Trashitem[];
+  // equipmentitem: Equipmentitem[];
+  weapon: Weapon[];
+  // mount: Mount[];
+  // furnitureitem: Furnitureitem[];
+  // mountskin: Mountskin[];
+  // journalitem: Journalitem[];
+  // labourercontract: Labourercontract[];
+  // transformationweapon: Transformationweapon[];
+  // crystalleagueitem: Crystalleagueitem[];
+  // siegebanner: Siegebanner[];
+  // killtrophy: Killtrophy[];
+}
+export interface Weapon {
+  uniquename: string;
+  maxqualitylevel: string;
+  abilitypower: string;
+  slottype: string;
+  shopcategory: string;
+  shopsubcategory1: string;
+  attacktype: string;
+  mainhandanimationtype: string;
+  attackdamage: string;
+  attackspeed: string;
+  twohanded: string;
+  attackrange: string;
+  tier: string;
+  weight: string;
+  activespellslots: string;
+  passivespellslots: string;
+  durability: string;
+  durabilityloss_attack: string;
+  durabilityloss_spelluse: string;
+  durabilityloss_receivedattack: string;
+  durabilityloss_receivedspell: string;
+  unlockedtocraft: string;
+  unlockedtoequip: string;
+  hitpointsmax: string;
+  itempower: string;
+  hitpointsregenerationbonus: string;
+  physicalspelldamagebonus: string;
+  magicspelldamagebonus: string;
+  itempowerprogressiontype: string;
+  focusfireprotectionpenetration: string;
+  uicraftsoundstart: string;
+  uicraftsoundfinish: string;
+  craftingcategory: string;
+  healmodifier: string;
+  canbeovercharged: string;
+  masterymodifier: string;
+  combatspecachievement: string;
+  physicalattackdamagebonus: string;
+  magicattackdamagebonus: string;
+  shopsubcategory2: string;
+  craftingrequirements: CraftingRequirements[];
+  SocketPreset: SocketPreset;
+  craftingspelllist: CraftingSpellList;
+  AudioInfo: AudioInfo;
+  enchantments: Enchantments;
+}
+
+export interface CraftingRequirements {
+  silver: string;
+  time: string;
+  craftingfocus: string;
+  craftresource: CraftResource[];
+}
+
+export interface CraftResource {
+  uniquename: string;
+  count: string;
+  enchantmentlevel?: string;
+}
+
+export interface Upgraderequirements {
+  upgraderesource: UpgradeResource[];
+}
+
+export interface UpgradeResource {
+  uniquename: string;
+  count: string;
+}
+
+export interface SocketPreset {
+  name: string;
+}
+
+export interface CraftingSpellList {
+  craftspell: CraftSpell[];
+}
+
+export interface CraftSpell {
+  uniquename: string;
+  slots?: string;
+  tag?: string;
+}
+
+export interface AudioInfo {
+  name: string;
+}
+
+export interface Enchantments {
+  enchantment: Enchantment[];
+}
+
+export interface Enchantment {
+  enchantmentlevel: string;
+  itempower: string;
+  durability: string;
+  craftingrequirements: CraftingRequirements;
+  upgraderequirements?: Upgraderequirements;
+}
