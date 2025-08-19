@@ -1,6 +1,5 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {model} from '@angular/core';
 
 @Component({
   selector: 'app-input',
@@ -9,26 +8,42 @@ import {model} from '@angular/core';
   templateUrl: './input.component.html',
   styleUrls: ['./input.component.scss']
 })
-export class InputComponent {
+export class InputComponent implements OnChanges {
   @Input() displayOnly = false;
-  value = model<number>(0);
+  @Input() value: number = 0;
+  @Output() valueChange = new EventEmitter<number>();
+
+  get displayValue(): string {
+    return this.formatValue(this.value);
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['value']) {
+      this.valueChange.emit(this.value);
+    }
+  }
 
   onBlur(e: Event) {
     if (this.displayOnly) return;
     const el = e.target as HTMLInputElement;
     const parsed = this.parseValue(el.value);
-    if (parsed !== this.value()) this.value.set(parsed);
-    el.value = this.formatValue(this.value());
+    if (parsed !== this.value) {
+      this.value = parsed;
+      this.valueChange.emit(this.value);
+    }
+    el.value = this.formatValue(this.value);
   }
 
   increase() {
     if (this.displayOnly) return;
-    this.value.set(this.value() + this.getVisibleDigitStep(this.value()));
+    this.value = this.value + this.getVisibleDigitStep(this.value);
+    this.valueChange.emit(this.value);
   }
 
   decrease() {
     if (this.displayOnly) return;
-    this.value.set(Math.max(0, this.value() - this.getVisibleDigitStep(this.value())));
+    this.value = Math.max(0, this.value - this.getVisibleDigitStep(this.value));
+    this.valueChange.emit(this.value);
   }
 
   private getVisibleDigitStep(val: number): number {
@@ -43,9 +58,9 @@ export class InputComponent {
 
   private parseValue(str: string): number {
     const m = str.trim().toLowerCase().match(/^([\d.,]+)\s*([km]?)$/);
-    if (!m) return this.value();
+    if (!m) return this.value;
     const num = parseFloat(m[1].replace(',', '.'));
-    if (isNaN(num)) return this.value();
+    if (isNaN(num)) return this.value;
     const u = m[2];
     if (u === 'k') return Math.round(num * 1_000);
     if (u === 'm') return Math.round(num * 1_000_000);

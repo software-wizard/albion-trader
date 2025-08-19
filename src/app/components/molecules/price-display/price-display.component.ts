@@ -19,7 +19,7 @@ interface TableCell {
 export class PriceDisplayComponent implements OnChanges {
   @Input() prices!: PriceEntry[];
   @Input() displayType!: PriceType;
-  @Input() selectedPrice!: WritableSignal<number>;
+  @Input() selectedPriceSignal!: WritableSignal<number>;
   @Input() inTwoRows: boolean = false;
   readonly citiesOrder = [
     City.FortSterling, City.Lymhurst, City.Bridgewatch, City.Martlock, City.Thetford, City.BlackMarket,
@@ -46,7 +46,7 @@ export class PriceDisplayComponent implements OnChanges {
 
   onCellClick(city: City): void {
     this.selectedCity = city;
-    this.selectedPrice.set(this.getPriceForSelectedCity())
+    this.selectedPriceSignal.set(this.getPriceForSelectedCity())
   }
 
   getPriceForSelectedCity(): number {

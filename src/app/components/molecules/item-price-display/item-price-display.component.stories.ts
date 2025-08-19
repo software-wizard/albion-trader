@@ -24,6 +24,6 @@ export const Default: Story = {
   args: {
     prices: data as PriceEntry[],
     displayType: PriceType.SellMin,
-    selectedPrices: [signal(0), signal(0), signal(0), signal(0), signal(0)]
+    selectedPricesPerQualitySignals: [signal(0), signal(0), signal(0), signal(0), signal(0)]
   },
 };

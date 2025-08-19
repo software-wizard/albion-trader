@@ -3,15 +3,17 @@
     <div class="recipes-wrapper" *ngFor="let res of craftingrequirement.craftresource  let i = index">
       <app-craft-resource
         [craftResource]="res"
-        [selectedResourcePrice]="resourcesPrices[i]"
+        [selectedResourcePrice]="resourcePricesSignal[i]"
       />
       <div class="recipes-col">
-        <app-input [displayOnly]="true" [value]="resourcesPrices[i]() * craftingrequirement.craftresource[i].count"/>
-        <app-input [value]="resourcesPrices[i]()" (valueChange)="priceChangedManually(i, $event)"/>
+        <app-input [displayOnly]="true"
+                   [value]="resourcePricesSignal[i]() * craftingrequirement.craftresource[i].count"
+                   (valueChange)="updateResourcesCost()"/>
+        <app-input [value]="resourcePricesSignal[i]()" (valueChange)="priceChangedManually(i, $event)"/>
       </div>
     </div>
   </div>
 
+  <app-input class="summary" [displayOnly]="true" [value]="totalResourcesCostSignal()"></app-input>
 
-  <app-input class="summary" [displayOnly]="true" [value]="getResourcesPrice()"></app-input>
 </div>

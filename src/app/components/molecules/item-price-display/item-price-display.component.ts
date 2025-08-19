@@ -15,7 +15,7 @@ export class ItemPriceDisplayComponent implements OnChanges {
   @Input() prices!: PriceEntry[];
   @Input() pricesMap: Map<number, PriceEntry[]> = new Map();
   @Input() displayType!: PriceType;
-  @Input() selectedPrices!: WritableSignal<number>[];
+  @Input() selectedPricesPerQualitySignals!: WritableSignal<number>[];
 
   readonly qualities = [
     ItemQuality.Normal, ItemQuality.Good, ItemQuality.Outstanding, ItemQuality.Excellent, ItemQuality.Masterpiece,

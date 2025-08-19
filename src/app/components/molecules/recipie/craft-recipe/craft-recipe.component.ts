@@ -11,19 +11,35 @@ import {InputComponent} from "../../../atoms/input/input.component";
   templateUrl: './craft-recipe.component.html',
   styleUrls: ['./craft-recipe.component.scss']
 })
-export class CraftRecipeComponent {
+export class CraftRecipeComponent implements OnChanges {
   @Input() craftingrequirement!: CraftingRequirements;
-  @Input() resourcesPrices: WritableSignal<number>[] = [];
+  @Input() totalResourcesCostSignal!: WritableSignal<number>;
+  resourcePricesSignal: WritableSignal<number>[] = [];
 
-  getResourcesPrice() {
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['craftingrequirement']) {
+      this.resourcePricesSignal = [];
+      for (let i = 0; i < this.craftingrequirement.craftresource.length; i++) {
+        this.resourcePricesSignal.push(signal(0));
+      }
+    }
+  }
+
+  updateResourcesCost() {
+    if (!this.craftingrequirement || this.resourcePricesSignal.length === 0) return;
+
     let buffer = 0;
     for (let i = 0; i < this.craftingrequirement.craftresource.length; i++) {
-      buffer += parseInt(this.craftingrequirement.craftresource[i].count) * this.resourcesPrices[i]();
+      if (this.resourcePricesSignal[i]) {
+        buffer += parseInt(this.craftingrequirement.craftresource[i].count) * this.resourcePricesSignal[i]();
+      }
     }
-    return buffer;
+    console.log('Całkowita suma:', buffer);
+    this.totalResourcesCostSignal.set(buffer)
   }
 
   priceChangedManually(index: number, $event: number) {
-    this.resourcesPrices[index].set($event);
+    this.resourcePricesSignal[index].set($event);
+    this.updateResourcesCost();
   }
 }

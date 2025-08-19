@@ -19,14 +19,14 @@ import {IconComponent} from "../../atoms/icon/icon.component";
 })
 export class WeaponComponent implements OnChanges {
   @Input() weapon!: Weapon;
-  weaponPrices: Map<string, PriceEntry[]> = new Map<string, PriceEntry[]>();
-  selectedPrices: Map<number, WritableSignal<number>[]> = new Map(
+  apiWeaponPrices: Map<string, PriceEntry[]> = new Map<string, PriceEntry[]>();
+  selectedPricesSignalMap: Map<number, WritableSignal<number>[]> = new Map(
     Array.from({length: 5}, (_, i) => [
       i,
       Array.from({length: 5}, () => signal(0))
     ])
   );
-  private resourcesPrices: WritableSignal<number>[] = [];
+  totalResourcePrice: WritableSignal<number>[] = [];
 
   constructor(private pricesService: PriceService) {
   }
@@ -34,22 +34,22 @@ export class WeaponComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['weapon']?.currentValue) {
       this.pricesService.getPrices(this.weapon.uniquename)
-        .subscribe(prices => this.weaponPrices.set(this.weapon.uniquename, prices));
+        .subscribe(prices => this.apiWeaponPrices.set(this.weapon.uniquename, prices));
 
       for (let i = 1; i <= 4; i++) {
         let enchantName = `${this.weapon.uniquename}@${i}`;
         this.pricesService.getPrices(enchantName)
-          .subscribe(prices => this.weaponPrices.set(enchantName, prices));
+          .subscribe(prices => this.apiWeaponPrices.set(enchantName, prices));
       }
 
-      for (let i = 0; i < this.weaponPrices.size; i++) {
-        this.resourcesPrices.push(signal(0))
+      for (let i = 0; i < this.apiWeaponPrices.size; i++) {
+        this.totalResourcePrice.push(signal(0))
       }
     }
   }
 
   getProfit(enchant: number, quality: number) {
-    return this.selectedPrices.get(enchant)![quality]() - this.resourcesPrices[enchant]();
+    return this.selectedPricesSignalMap.get(enchant)![quality]() - this.totalResourcePrice[enchant]();
   }
 
   protected readonly PriceType = PriceType;

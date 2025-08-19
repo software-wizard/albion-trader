@@ -4,7 +4,7 @@
       <app-price-display
         [displayType]="PriceType.SellMin"
         [prices]="pricesMap.get(i+1)!"
-        [selectedPrice]="selectedPrices[i]"
+        [selectedPriceSignal]="selectedPricesPerQualitySignals[i]"
       />
     }
   </div>

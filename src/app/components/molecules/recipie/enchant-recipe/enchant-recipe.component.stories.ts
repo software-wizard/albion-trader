@@ -6,6 +6,7 @@ import plankData from '../t41-plank-mock.json';
 import {PriceService} from "../../../../services/price-service";
 import {PriceEntry} from "../../../../data-types/albion-price-data";
 import {EnchantRecipeComponent} from "./enchant-recipe.component";
+import {signal} from "@angular/core";
 
 export default {
   title: 'Molecules/CraftRecipes/EnchantRecipeComponent',
@@ -57,5 +58,6 @@ export const Default: Story = {
           }]
         }
       },
+    totalResourcesCostSignal: signal(0)
   },
 };

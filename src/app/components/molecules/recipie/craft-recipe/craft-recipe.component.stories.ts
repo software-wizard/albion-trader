@@ -46,6 +46,6 @@ export const Default: Story = {
         {uniquename: 'T4_METALBAR_LEVEL1@1', count: '16'}
       ]
     },
-    resourcesPrices: [signal(0), signal(0), signal(0), signal(0), signal(0)]
+    resourcePricesSignal: [signal(0), signal(0), signal(0), signal(0), signal(0)]
   }
 };

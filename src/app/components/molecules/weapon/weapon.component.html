@@ -5,21 +5,22 @@
 
 @for (flatCraft of weapon.craftingrequirements; track flatCraft; let i = $index) {
   <div class="row">
-    <app-recipe [craftingrequirement]="flatCraft"></app-recipe> - tutaj wstawić resource price singal
+    <app-recipe [craftingrequirement]="flatCraft"
+                [totalResourcesCostSignal]="totalResourcePrice[i]"></app-recipe>
     <app-item-price-display
       [displayType]="PriceType.SellMin"
-      [prices]="weaponPrices.get(weapon.uniquename) || []"
-      [selectedPrices]="selectedPrices.get(0)!">
+      [prices]="apiWeaponPrices.get(weapon.uniquename) || []"
+      [selectedPricesPerQualitySignals]="selectedPricesSignalMap.get(0)!">
     </app-item-price-display>
 
     <div class="column">
-    @for (baseEnchantPrices of selectedPrices.get(0); track baseEnchantPrices; let i = $index) {
-      <app-input [value]="selectedPrices.get(0)![i]()"/>
-    }
+      @for (baseEnchantPrices of selectedPricesSignalMap.get(0); track baseEnchantPrices; let i = $index) {
+        <app-input [value]="selectedPricesSignalMap.get(0)![i]()"/>
+      }
     </div>
 
     <div class="column">
-      @for (quality of selectedPrices.get(0)!; track $index;) {
+      @for (quality of selectedPricesSignalMap.get(0)!; track $index; ) {
         <app-input [value]="getProfit(0, $index)"/>
       }
     </div>
@@ -29,15 +30,22 @@
 @for (enchantCraft of weapon.enchantments.enchantment; track enchantCraft.enchantmentlevel) {
   <app-separator></app-separator>
   <div class="row">
-    <app-enchant-recipe [enchant]="enchantCraft"></app-enchant-recipe>
+    <app-enchant-recipe [enchant]="enchantCraft"
+                        [totalResourcesCostSignal]="totalResourcePrice[parseInt(enchantCraft.enchantmentlevel)]"></app-enchant-recipe>
     <app-item-price-display
       [displayType]="PriceType.SellMin"
-      [prices]="weaponPrices.get(weapon.uniquename + '@' + enchantCraft.enchantmentlevel) || []"
-      [selectedPrices]="selectedPrices.get(parseInt(enchantCraft.enchantmentlevel))!">
+      [prices]="apiWeaponPrices.get(weapon.uniquename + '@' + enchantCraft.enchantmentlevel) || []"
+      [selectedPricesPerQualitySignals]="selectedPricesSignalMap.get(parseInt(enchantCraft.enchantmentlevel))!">
     </app-item-price-display>
     <div class="column">
-      @for (signal of selectedPrices.get(parseInt(enchantCraft.enchantmentlevel))!; track $index; let i = $index) {
+      @for (signal of selectedPricesSignalMap.get(parseInt(enchantCraft.enchantmentlevel))!; track $index; let i = $index) {
         <app-input [value]="signal()"/>
+      }
+    </div>
+
+    <div class="column">
+      @for (quality of selectedPricesSignalMap.get(parseInt(enchantCraft.enchantmentlevel))!; track $index; ) {
+        <app-input [value]="getProfit(parseInt(enchantCraft.enchantmentlevel), $index)"/>
       }
     </div>
   </div>

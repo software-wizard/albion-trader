@@ -16,8 +16,6 @@ export class AlbionItemsService {
       }))
   };
 
-  //usunięcie @
-  //Wymuszenie tablic dla: craftingrequirements, craftresource, upgraderesource, enchantment gdy były pojedynczym obiektem.
   normalizeKeys(obj: any): any {
     if (Array.isArray(obj)) {
       return obj.map(e => this.normalizeKeys(e));

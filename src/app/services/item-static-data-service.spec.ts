@@ -1,4 +1,3 @@
-// services/albion-items.service.spec.ts
 import { TestBed } from '@angular/core/testing';
 import { HttpClientModule } from '@angular/common/http';
 import {AlbionItemsService} from "./item-static-data-service";
