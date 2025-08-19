@@ -52,6 +52,12 @@ export class WeaponComponent implements OnChanges {
     return this.selectedPricesSignalMap.get(enchant)![quality]() - this.totalResourcePrice[enchant]();
   }
 
+  getProfitPercentage(enchant: number, $index: number) {
+    const percentageProfit = this.getProfit(enchant, $index) / this.totalResourcePrice[enchant]() * 100
+    return Math.round(percentageProfit * 10) / 10
+  }
+
   protected readonly PriceType = PriceType;
+
   protected readonly parseInt = parseInt;
 }

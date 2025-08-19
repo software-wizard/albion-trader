@@ -21,7 +21,13 @@
 
     <div class="column">
       @for (quality of selectedPricesSignalMap.get(0)!; track $index; ) {
-        <app-input [value]="getProfit(0, $index)"/>
+        <app-input [displayOnly]="true" [value]="getProfit(0, $index)"/>
+      }
+    </div>
+
+    <div class="column">
+      @for (quality of selectedPricesSignalMap.get(0)!; track $index; ) {
+        <app-input [displayOnly]="true" [value]="getProfitPercentage(0, $index)"/>
       }
     </div>
   </div>
@@ -45,7 +51,12 @@
 
     <div class="column">
       @for (quality of selectedPricesSignalMap.get(parseInt(enchantCraft.enchantmentlevel))!; track $index; ) {
-        <app-input [value]="getProfit(parseInt(enchantCraft.enchantmentlevel), $index)"/>
+        <app-input [displayOnly]="true" [value]="getProfit(parseInt(enchantCraft.enchantmentlevel), $index)"/>
+      }
+    </div>
+    <div class="column">
+      @for (quality of selectedPricesSignalMap.get(0)!; track $index; ) {
+        <app-input [displayOnly]="true" [value]="getProfitPercentage(parseInt(enchantCraft.enchantmentlevel), $index)"/>
       }
     </div>
   </div>
