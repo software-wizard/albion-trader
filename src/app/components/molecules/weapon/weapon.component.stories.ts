@@ -2,6 +2,8 @@ import {applicationConfig, Meta, StoryObj} from '@storybook/angular';
 import {Component, inject, OnInit, signal} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {provideHttpClient} from '@angular/common/http';
+import { MatCardModule } from '@angular/material/card';
+
 
 import {AlbionItemsService} from '../../../services/item-static-data-service';
 import {AlbionStaticData, Weapon} from '../../../../assets/albion-static-data';
@@ -29,7 +31,7 @@ function pickWeapon(ds: AlbionStaticData): Weapon | null {
 @Component({
   standalone: true,
   selector: 'story-weapon-wrapper',
-  imports: [CommonModule, WeaponComponent],
+  imports: [CommonModule, WeaponComponent, MatCardModule],
   template: `
     <ng-container *ngIf="weapon(); else loading">
       <app-weapon [weapon]="weapon()!"></app-weapon>
