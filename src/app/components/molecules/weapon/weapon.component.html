@@ -20,7 +20,7 @@
 
     <div class="column">
       @for (quality of selectedPrices.get(0)!; track $index;) {
-        <app-input [value]="quality()"/>
+        <app-input [value]="getProfit(0, $index)"/>
       }
     </div>
   </div>

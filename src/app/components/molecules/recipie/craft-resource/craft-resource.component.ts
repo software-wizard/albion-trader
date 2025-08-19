@@ -16,7 +16,7 @@ import {PriceService} from "../../../../services/price-service";
 })
 export class CraftResourceComponent implements OnChanges {
   @Input() craftResource!: CraftResource;
-  @Input() resourcePrice!: WritableSignal<number>
+  @Input() selectedResourcePrice!: WritableSignal<number>
   resourcePrices: PriceEntry[] = [];
   protected readonly PriceType = PriceType;
 

@@ -11,27 +11,19 @@ import {InputComponent} from "../../../atoms/input/input.component";
   templateUrl: './craft-recipe.component.html',
   styleUrls: ['./craft-recipe.component.scss']
 })
-export class CraftRecipeComponent implements OnChanges {
+export class CraftRecipeComponent {
   @Input() craftingrequirement!: CraftingRequirements;
-  resourcesPrice: WritableSignal<number>[] = [];
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['craftingrequirement']) {
-      for (let i = 0; i < this.craftingrequirement.craftresource.length; i++) {
-        this.resourcesPrice.push(signal(0))
-      }
-    }
-  }
+  @Input() resourcesPrices: WritableSignal<number>[] = [];
 
   getResourcesPrice() {
     let buffer = 0;
     for (let i = 0; i < this.craftingrequirement.craftresource.length; i++) {
-      buffer += parseInt(this.craftingrequirement.craftresource[i].count) * this.resourcesPrice[i]();
+      buffer += parseInt(this.craftingrequirement.craftresource[i].count) * this.resourcesPrices[i]();
     }
     return buffer;
   }
 
   priceChangedManually(index: number, $event: number) {
-    this.resourcesPrice[index].set($event);
+    this.resourcesPrices[index].set($event);
   }
 }

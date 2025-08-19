@@ -26,6 +26,7 @@ export class WeaponComponent implements OnChanges {
       Array.from({length: 5}, () => signal(0))
     ])
   );
+  private resourcesPrices: WritableSignal<number>[] = [];
 
   constructor(private pricesService: PriceService) {
   }
@@ -40,11 +41,15 @@ export class WeaponComponent implements OnChanges {
         this.pricesService.getPrices(enchantName)
           .subscribe(prices => this.weaponPrices.set(enchantName, prices));
       }
+
+      for (let i = 0; i < this.weaponPrices.size; i++) {
+        this.resourcesPrices.push(signal(0))
+      }
     }
   }
 
-  getProfit(enchant: number, quality: number){
-    this.selectedPrices.get(enchant)![quality]()
+  getProfit(enchant: number, quality: number) {
+    return this.selectedPrices.get(enchant)![quality]() - this.resourcesPrices[enchant]();
   }
 
   protected readonly PriceType = PriceType;

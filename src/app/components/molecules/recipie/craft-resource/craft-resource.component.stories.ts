@@ -5,6 +5,7 @@ import {PriceEntry} from '../../../../data-types/albion-price-data';
 import data from '../t41-metal-bar-mock.json';
 import {of} from 'rxjs';
 import {PriceService} from "../../../../services/price-service";
+import {signal} from "@angular/core";
 
 export default {
   title: 'molecules/CraftRecipes/CraftResourceComponent',
@@ -30,6 +31,7 @@ type Story = StoryObj<CraftResourceComponent>;
 
 export const Default: Story = {
   args: {
-    craftResource: {uniquename: 'T4_METALBAR_LEVEL1@1', count: '8'}
+    craftResource: {uniquename: 'T4_METALBAR_LEVEL1@1', count: '8'},
+    selectedResourcePrice: signal(0)
   }
 };
