@@ -18,7 +18,6 @@ export class CraftResourceComponent implements OnChanges {
   @Input() craftResource!: CraftResource;
   @Input() resourcePrice!: WritableSignal<number>
   resourcePrices: PriceEntry[] = [];
-  protected readonly ItemQuality = ItemQuality;
   protected readonly PriceType = PriceType;
 
   constructor(private pricesService: PriceService) {}
@@ -29,6 +28,4 @@ export class CraftResourceComponent implements OnChanges {
         .subscribe(prices => this.resourcePrices = prices);
     }
   }
-
-  protected readonly parseInt = parseInt;
 }

@@ -1,20 +1,14 @@
-.wrapper {
-  display: flex;
-  flex-direction: column;
-}
-
-.table-and-input {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  gap: 1rem;
-}
-
 .row {
   display: flex;
   flex-direction: row;
   gap: 0.5rem;
   align-items: center;
+}
+
+.two-rows-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .cell {
@@ -30,8 +24,4 @@
   outline: 0.2rem solid #222;
   outline-offset: -0.2rem;
   font-weight: bold;
-}
-
-.single-input {
-  align-self: flex-start;
 }

@@ -19,19 +19,18 @@ interface TableCell {
 export class PriceDisplayComponent implements OnChanges {
   @Input() prices!: PriceEntry[];
   @Input() displayType!: PriceType;
-  @Input() resourcePrice!: WritableSignal<number>;
-
+  @Input() selectedPrice!: WritableSignal<number>;
+  @Input() inTwoRows: boolean = false;
   readonly citiesOrder = [
     City.FortSterling, City.Lymhurst, City.Bridgewatch, City.Martlock, City.Thetford, City.BlackMarket,
   ];
   protected readonly cityColors = cityColors;
-  protected cities?: TableCell[];
+  protected cells?: TableCell[];
   protected selectedCity?: City;
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['prices'] || changes['visibleQualities'] || changes['displayType']) {
-      this.cities = this.updateTable();
-      this.computeSelectedCellValue();
+    if (changes['prices'] || changes['displayType']) {
+      this.cells = this.updateTable();
     }
   }
 
@@ -47,11 +46,11 @@ export class PriceDisplayComponent implements OnChanges {
 
   onCellClick(city: City): void {
     this.selectedCity = city;
-    this.resourcePrice.set(this.computeSelectedCellValue())
+    this.selectedPrice.set(this.getPriceForSelectedCity())
   }
 
-  computeSelectedCellValue(): number {
+  getPriceForSelectedCity(): number {
     const city = this.citiesOrder.find(city => city === this.selectedCity);
-    return this.cities!.find(r => r.city === city)!.price;
+    return this.cells!.find(r => r.city === city)!.price;
   }
 }

@@ -28,7 +28,7 @@ export const cityColors: Record<City, string> = {
 };
 
 export enum ItemQuality {
-  Normal = 1,
+  Normal = 0,
   Good,
   Outstanding,
   Excellent,

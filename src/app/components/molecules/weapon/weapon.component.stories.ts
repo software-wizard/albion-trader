@@ -12,6 +12,11 @@ import plankData from './t41-plank-mock.json';
 import metalbarData from './t41-metal-bar-mock.json';
 import mainAxeData from './t41-main-axe-mock.json';
 
+import plankData0 from './t40-plank-mock.json';
+import metalbarData0 from './t40-metal-bar-mock.json';
+import mainAxeData0 from './t40-main-axe-mock.json';
+
+
 const WEAPON_NAME = 'T4_MAIN_AXE';
 
 function pickWeapon(ds: AlbionStaticData): Weapon | null {
@@ -39,7 +44,6 @@ class StoryWeaponWrapper implements OnInit {
   ngOnInit() {
     this.svc.loadItems().subscribe(ds => {
       this.weapon.set(pickWeapon(ds))
-      JSON.stringify(ds.weapon);
     });
   }
 }
@@ -57,6 +61,10 @@ export default {
             getPrices: (name: string) => {
               name = PriceService.internalToApiId(name);
               console.log(`getPrices ${name}`)
+              if (name === 'T4_PLANKS') return of(plankData0);
+              if (name === 'T4_METALBAR') return of(metalbarData0);
+              if (name === 'T4_MAIN_AXE') return of(mainAxeData0);
+
               if (name === 'T4_PLANKS_LEVEL1@1') return of(plankData);
               if (name === 'T4_METALBAR_LEVEL1@1') return of(metalbarData);
               if (name === 'T4_MAIN_AXE@1') return of(mainAxeData);
@@ -70,4 +78,6 @@ export default {
 } as Meta<StoryWeaponWrapper>;
 
 type Story = StoryObj<StoryWeaponWrapper>;
-export const Default: Story = {};
+export const Default: Story = {
+
+};

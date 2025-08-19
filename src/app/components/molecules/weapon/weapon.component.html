@@ -1,26 +1,44 @@
-<hr />
 <div class="header">
   <app-icon [itemName]="weapon.uniquename"></app-icon>
   <div class="name">{{ weapon.uniquename }}</div>
 </div>
 
-<div class="row" *ngFor="let flatCraft of weapon.craftingrequirements; let i = index">
-  <app-recipe [craftingrequirement]="flatCraft"></app-recipe>
-  <app-price-display
-    [displayType]="PriceType.SellMin"
-    [prices]="weaponPrices.get(weapon.uniquename) || []">
-  </app-price-display>
-  <app-input [value]="123"/>
-</div>
+@for (flatCraft of weapon.craftingrequirements; track flatCraft; let i = $index) {
+  <div class="row">
+    <app-recipe [craftingrequirement]="flatCraft"></app-recipe> - tutaj wstawić resource price singal
+    <app-item-price-display
+      [displayType]="PriceType.SellMin"
+      [prices]="weaponPrices.get(weapon.uniquename) || []"
+      [selectedPrices]="selectedPrices.get(0)!">
+    </app-item-price-display>
 
-<div *ngFor="let enchantCraft of weapon.enchantments.enchantment; let i = index">
+    <div class="column">
+    @for (baseEnchantPrices of selectedPrices.get(0); track baseEnchantPrices; let i = $index) {
+      <app-input [value]="selectedPrices.get(0)![i]()"/>
+    }
+    </div>
+
+    <div class="column">
+      @for (quality of selectedPrices.get(0)!; track $index;) {
+        <app-input [value]="quality()"/>
+      }
+    </div>
+  </div>
+}
+
+@for (enchantCraft of weapon.enchantments.enchantment; track enchantCraft.enchantmentlevel) {
   <app-separator></app-separator>
   <div class="row">
     <app-enchant-recipe [enchant]="enchantCraft"></app-enchant-recipe>
-    <app-price-display
+    <app-item-price-display
       [displayType]="PriceType.SellMin"
-      [prices]="weaponPrices.get(weapon.uniquename + '@' + enchantCraft.enchantmentlevel) || []">
-    </app-price-display>
-    <app-input [value]="345"/>
+      [prices]="weaponPrices.get(weapon.uniquename + '@' + enchantCraft.enchantmentlevel) || []"
+      [selectedPrices]="selectedPrices.get(parseInt(enchantCraft.enchantmentlevel))!">
+    </app-item-price-display>
+    <div class="column">
+      @for (signal of selectedPrices.get(parseInt(enchantCraft.enchantmentlevel))!; track $index; let i = $index) {
+        <app-input [value]="signal()"/>
+      }
+    </div>
   </div>
-</div>
+}

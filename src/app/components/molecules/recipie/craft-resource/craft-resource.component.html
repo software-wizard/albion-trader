@@ -2,9 +2,9 @@
   <app-icon [itemName]="craftResource.uniquename"/>
   <app-label [label]="'×' + craftResource.count"/>
   <app-price-display
-    [visibleQualities]="[ItemQuality.Normal]"
     [prices]="resourcePrices"
     [displayType]="PriceType.SellMin"
-    [resourcePrice]="resourcePrice"
+    [selectedPrice]="resourcePrice"
+    [inTwoRows]="true"
     />
 </div>

@@ -1,9 +1,9 @@
 [
   {
-    "item_id": "T4_METALBAR_LEVEL1@1",
+    "item_id": "T4_METALBAR",
     "city": "Black Market",
     "quality": 1,
-    "sell_price_min": 0,
+    "sell_price_min": 10,
     "sell_price_min_date": "0001-01-01T00:00:00",
     "sell_price_max": 0,
     "sell_price_max_date": "0001-01-01T00:00:00",
@@ -13,10 +13,10 @@
     "buy_price_max_date": "0001-01-01T00:00:00"
   },
   {
-    "item_id": "T4_METALBAR_LEVEL1@1",
+    "item_id": "T4_METALBAR",
     "city": "Brecilien",
     "quality": 1,
-    "sell_price_min": 189,
+    "sell_price_min": 1189,
     "sell_price_min_date": "2025-08-07T14:30:00",
     "sell_price_max": 213,
     "sell_price_max_date": "2025-08-07T14:30:00",
@@ -26,10 +26,10 @@
     "buy_price_max_date": "2025-08-06T17:55:00"
   },
   {
-    "item_id": "T4_METALBAR_LEVEL1@1",
+    "item_id": "T4_METALBAR",
     "city": "Bridgewatch",
     "quality": 1,
-    "sell_price_min": 206,
+    "sell_price_min": 1206,
     "sell_price_min_date": "2025-08-07T14:10:00",
     "sell_price_max": 222,
     "sell_price_max_date": "2025-08-07T14:10:00",
@@ -39,10 +39,10 @@
     "buy_price_max_date": "2025-08-07T14:10:00"
   },
   {
-    "item_id": "T4_METALBAR_LEVEL1@1",
+    "item_id": "T4_METALBAR",
     "city": "Caerleon",
     "quality": 1,
-    "sell_price_min": 227,
+    "sell_price_min": 1227,
     "sell_price_min_date": "2025-08-06T19:20:00",
     "sell_price_max": 900,
     "sell_price_max_date": "2025-08-06T19:20:00",
@@ -52,10 +52,10 @@
     "buy_price_max_date": "2025-08-06T19:20:00"
   },
   {
-    "item_id": "T4_METALBAR_LEVEL1@1",
+    "item_id": "T4_METALBAR",
     "city": "Fort Sterling",
     "quality": 1,
-    "sell_price_min": 236,
+    "sell_price_min": 1236,
     "sell_price_min_date": "2025-08-07T14:30:00",
     "sell_price_max": 236,
     "sell_price_max_date": "2025-08-07T14:30:00",
@@ -65,10 +65,10 @@
     "buy_price_max_date": "2025-08-07T14:15:00"
   },
   {
-    "item_id": "T4_METALBAR_LEVEL1@1",
+    "item_id": "T4_METALBAR",
     "city": "Lymhurst",
     "quality": 1,
-    "sell_price_min": 206,
+    "sell_price_min": 1206,
     "sell_price_min_date": "2025-08-07T14:00:00",
     "sell_price_max": 234,
     "sell_price_max_date": "2025-08-07T14:00:00",
@@ -78,10 +78,10 @@
     "buy_price_max_date": "2025-08-07T14:00:00"
   },
   {
-    "item_id": "T4_METALBAR_LEVEL1@1",
+    "item_id": "T4_METALBAR",
     "city": "Martlock",
     "quality": 1,
-    "sell_price_min": 207,
+    "sell_price_min": 1207,
     "sell_price_min_date": "2025-08-06T23:15:00",
     "sell_price_max": 215,
     "sell_price_max_date": "2025-08-06T23:15:00",
@@ -91,10 +91,10 @@
     "buy_price_max_date": "2025-08-06T23:25:00"
   },
   {
-    "item_id": "T4_METALBAR_LEVEL1@1",
+    "item_id": "T4_METALBAR",
     "city": "Thetford",
     "quality": 1,
-    "sell_price_min": 243,
+    "sell_price_min": 1243,
     "sell_price_min_date": "2025-08-07T09:00:00",
     "sell_price_max": 304,
     "sell_price_max_date": "2025-08-07T09:00:00",

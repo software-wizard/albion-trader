@@ -1,9 +1,9 @@
 [
   {
-    "item_id": "T4_PLANKS_LEVEL1@1",
+    "item_id": "T4_PLANKS",
     "city": "Black Market",
     "quality": 1,
-    "sell_price_min": 0,
+    "sell_price_min": 10,
     "sell_price_min_date": "0001-01-01T00:00:00",
     "sell_price_max": 0,
     "sell_price_max_date": "0001-01-01T00:00:00",
@@ -13,10 +13,10 @@
     "buy_price_max_date": "0001-01-01T00:00:00"
   },
   {
-    "item_id": "T4_PLANKS_LEVEL1@1",
+    "item_id": "T4_PLANKS",
     "city": "Brecilien",
     "quality": 1,
-    "sell_price_min": 85,
+    "sell_price_min": 185,
     "sell_price_min_date": "2025-08-07T14:30:00",
     "sell_price_max": 104,
     "sell_price_max_date": "2025-08-07T14:30:00",
@@ -26,10 +26,10 @@
     "buy_price_max_date": "2025-08-06T17:55:00"
   },
   {
-    "item_id": "T4_PLANKS_LEVEL1@1",
+    "item_id": "T4_PLANKS",
     "city": "Bridgewatch",
     "quality": 1,
-    "sell_price_min": 97,
+    "sell_price_min": 197,
     "sell_price_min_date": "2025-08-07T14:10:00",
     "sell_price_max": 113,
     "sell_price_max_date": "2025-08-07T14:10:00",
@@ -39,10 +39,10 @@
     "buy_price_max_date": "2025-08-07T14:10:00"
   },
   {
-    "item_id": "T4_PLANKS_LEVEL1@1",
+    "item_id": "T4_PLANKS",
     "city": "Caerleon",
     "quality": 1,
-    "sell_price_min": 113,
+    "sell_price_min": 1113,
     "sell_price_min_date": "2025-08-06T19:20:00",
     "sell_price_max": 792,
     "sell_price_max_date": "2025-08-06T19:20:00",
@@ -52,10 +52,10 @@
     "buy_price_max_date": "2025-08-06T19:20:00"
   },
   {
-    "item_id": "T4_PLANKS_LEVEL1@1",
+    "item_id": "T4_PLANKS",
     "city": "Fort Sterling",
     "quality": 1,
-    "sell_price_min": 118,
+    "sell_price_min": 1118,
     "sell_price_min_date": "2025-08-07T14:30:00",
     "sell_price_max": 120,
     "sell_price_max_date": "2025-08-07T14:30:00",
@@ -65,10 +65,10 @@
     "buy_price_max_date": "2025-08-07T14:15:00"
   },
   {
-    "item_id": "T4_PLANKS_LEVEL1@1",
+    "item_id": "T4_PLANKS",
     "city": "Lymhurst",
     "quality": 1,
-    "sell_price_min": 99,
+    "sell_price_min": 199,
     "sell_price_min_date": "2025-08-07T14:00:00",
     "sell_price_max": 124,
     "sell_price_max_date": "2025-08-07T14:00:00",
@@ -78,10 +78,10 @@
     "buy_price_max_date": "2025-08-07T14:00:00"
   },
   {
-    "item_id": "T4_PLANKS_LEVEL1@1",
+    "item_id": "T4_PLANKS",
     "city": "Martlock",
     "quality": 1,
-    "sell_price_min": 102,
+    "sell_price_min": 1102,
     "sell_price_min_date": "2025-08-06T23:15:00",
     "sell_price_max": 111,
     "sell_price_max_date": "2025-08-06T23:15:00",
@@ -91,10 +91,10 @@
     "buy_price_max_date": "2025-08-06T23:25:00"
   },
   {
-    "item_id": "T4_PLANKS_LEVEL1@1",
+    "item_id": "T4_PLANKS",
     "city": "Thetford",
     "quality": 1,
-    "sell_price_min": 121,
+    "sell_price_min": 1121,
     "sell_price_min_date": "2025-08-07T09:00:00",
     "sell_price_max": 188,
     "sell_price_max_date": "2025-08-07T09:00:00",

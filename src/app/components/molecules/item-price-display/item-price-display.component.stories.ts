@@ -3,6 +3,7 @@ import {ItemPriceDisplayComponent} from './item-price-display.component';
 import data from './t41-main-axe-mock.json';
 import {PriceEntry, PriceType} from "../../../data-types/albion-price-data";
 import {CommonModule} from "@angular/common";
+import {signal} from "@angular/core";
 
 export default {
   title: 'Molecules/ItemPriceDisplay',
@@ -23,5 +24,6 @@ export const Default: Story = {
   args: {
     prices: data as PriceEntry[],
     displayType: PriceType.SellMin,
+    selectedPrices: [signal(0), signal(0), signal(0), signal(0), signal(0)]
   },
 };
