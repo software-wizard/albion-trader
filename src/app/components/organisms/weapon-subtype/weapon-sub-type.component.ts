@@ -1,17 +1,17 @@
-import {Component, Input} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {Weapon} from '../../../../assets/albion-static-data';
-import {CraftRecipeComponent} from "../../molecules/recipie/craft-recipe/craft-recipe.component";
-import {IconComponent} from "../../atoms/icon/icon.component";
-import {SeparatorComponent} from "../../atoms/separator/separator.component";
-import {EnchantRecipeComponent} from "../../molecules/recipie/enchant-recipe/enchant-recipe.component";
+import { Component, Input } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { Weapon } from '../../../../assets/albion-static-data';
+import { WeaponComponent } from '../../molecules/weapon/weapon.component';
 
 @Component({
-  selector: 'app-weapon',
+  selector: 'app-weapon-sub-type',
   standalone: true,
-  imports: [CommonModule, CraftRecipeComponent, EnchantRecipeComponent, IconComponent, SeparatorComponent],
+  imports: [CommonModule, MatExpansionModule, WeaponComponent],
   templateUrl: './weapon-sub-type.component.html',
+  styleUrls: ['./weapon-sub-type.component.scss']
 })
 export class WeaponSubTypeComponent {
-  @Input() weapon!: Weapon;
+  @Input() weapons: Weapon[] = [];
+  @Input() categoryName: string = '';
 }

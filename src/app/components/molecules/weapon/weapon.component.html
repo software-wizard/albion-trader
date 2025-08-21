@@ -33,7 +33,7 @@
   </div>
 }
 
-@for (enchantCraft of weapon.enchantments.enchantment; track enchantCraft.enchantmentlevel) {
+@for (enchantCraft of weapon.enchantments?.enchantment; track enchantCraft.enchantmentlevel) {
   <app-separator></app-separator>
   <div class="row">
     <app-enchant-recipe [enchant]="enchantCraft"

@@ -1,14 +1,9 @@
-<hr/>
-<div>
-  <app-icon [itemName]="weapon.uniquename"/>
-  <div>{{ weapon.uniquename }}</div>
-</div>
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-title>{{ categoryName }} Weapons ({{ weapons.length }})</mat-panel-title>
+  </mat-expansion-panel-header>
 
-<div *ngFor="let flatCraft of weapon.craftingrequirements; let i = index">
-  <app-recipe [craftingrequirement]="flatCraft"></app-recipe>
-</div>
-
-<div *ngFor="let enchantCraft of weapon.enchantments?.enchantment; let i = index">
-  <app-separator/>
-  <app-enchant-recipe [enchant]=enchantCraft></app-enchant-recipe>
-</div>
+  @for (weapon of weapons; track weapon.uniquename) {
+    <app-weapon [weapon]="weapon"/>
+  }
+</mat-expansion-panel>
