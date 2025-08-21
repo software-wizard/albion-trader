@@ -14,7 +14,7 @@ describe('PriceService', () => {
     service = TestBed.inject(PriceService);
   });
 
-  it('should load and log first 3 equipment items', (done) => {
+  it('should convert internal IDs to API IDs correctly', () => {
     expect(PriceService.internalToApiId('T4_METALBAR')).toBe('T4_METALBAR');
     expect(PriceService.internalToApiId('T4_METALBAR_LEVEL1@1')).toBe('T4_METALBAR_LEVEL1@1');
     expect(PriceService.internalToApiId('T4_METALBAR_LEVEL1')).toBe('T4_METALBAR_LEVEL1@1');

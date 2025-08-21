@@ -6,6 +6,14 @@ import { provideHttpClient } from '@angular/common/http';
 import { AlbionItemsService } from '../../../services/item-static-data-service';
 import { AlbionStaticData, Weapon } from '../../../../assets/albion-static-data';
 import { WeaponSubTypeComponent } from './weapon-sub-type.component';
+import {PriceService} from "../../../services/price-service";
+import {of} from "rxjs";
+import plankData0 from "../../molecules/weapon/t40-plank-mock.json";
+import metalbarData0 from "../../molecules/weapon/t40-metal-bar-mock.json";
+import mainAxeData0 from "../../molecules/weapon/t40-main-axe-mock.json";
+import plankData from "../../molecules/weapon/t41-plank-mock.json";
+import metalbarData from "../../molecules/weapon/t41-metal-bar-mock.json";
+import mainAxeData from "../../molecules/weapon/t41-main-axe-mock.json";
 
 function filterAxeWeapons(ds: AlbionStaticData): Weapon[] {
   if (Array.isArray(ds?.weapon)) {
@@ -48,6 +56,14 @@ export default {
     applicationConfig({
       providers: [
         provideHttpClient(),
+        {
+          provide: PriceService,
+          useValue: {
+            getPrices: (name: string) => {
+              return of([]);
+            },
+          },
+        },
       ],
     }),
   ],

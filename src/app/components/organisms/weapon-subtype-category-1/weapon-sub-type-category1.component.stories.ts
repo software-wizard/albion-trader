@@ -1,11 +1,12 @@
-import { Meta, StoryObj } from '@storybook/angular';
-import { applicationConfig } from '@storybook/angular';
-import { Component, inject, OnInit, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { provideHttpClient } from '@angular/common/http';
-import { AlbionItemsService } from '../../../services/item-static-data-service';
-import { AlbionStaticData, Weapon } from '../../../../assets/albion-static-data';
-import { WeaponSubTypeCategory1Component } from './weapon-sub-type-category1.component';
+import {applicationConfig, Meta, StoryObj} from '@storybook/angular';
+import {Component, inject, OnInit, signal} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {provideHttpClient} from '@angular/common/http';
+import {AlbionItemsService} from '../../../services/item-static-data-service';
+import {AlbionStaticData, Weapon} from '../../../../assets/albion-static-data';
+import {WeaponSubTypeCategory1Component} from './weapon-sub-type-category1.component';
+import {PriceService} from "../../../services/price-service";
+import {of} from "rxjs";
 
 function filterAxeWeapons(ds: AlbionStaticData): Weapon[] {
   if (Array.isArray(ds?.weapon)) {
@@ -48,6 +49,14 @@ export default {
     applicationConfig({
       providers: [
         provideHttpClient(),
+        {
+          provide: PriceService,
+          useValue: {
+            getPrices: (name: string) => {
+              return of([]);
+            },
+          },
+        },
       ],
     }),
   ],
