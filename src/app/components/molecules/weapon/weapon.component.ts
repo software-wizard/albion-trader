@@ -9,11 +9,14 @@ import {PriceEntry, PriceType} from "../../../data-types/albion-price-data";
 import {InputComponent} from "../../atoms/input/input.component";
 import {ItemPriceDisplayComponent} from "../item-price-display/item-price-display.component";
 import {IconComponent} from "../../atoms/icon/icon.component";
+import {MatCardModule} from '@angular/material/card';
+import {MatExpansionModule} from '@angular/material/expansion';
+
 
 @Component({
   selector: 'app-weapon',
   standalone: true,
-  imports: [CommonModule, CraftRecipeComponent, SeparatorComponent, EnchantRecipeComponent, InputComponent, ItemPriceDisplayComponent, IconComponent],
+  imports: [CommonModule, CraftRecipeComponent, SeparatorComponent, EnchantRecipeComponent, InputComponent, ItemPriceDisplayComponent, IconComponent, MatCardModule, MatExpansionModule],
   templateUrl: './weapon.component.html',
   styleUrls: ['./weapon.component.scss']
 })

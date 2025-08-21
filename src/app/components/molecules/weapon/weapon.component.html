@@ -1,63 +1,72 @@
-<div class="header">
-  <app-icon [itemName]="weapon.uniquename"></app-icon>
-  <div class="name">{{ weapon.uniquename }}</div>
-</div>
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-title>{{ weapon.uniquename }}</mat-panel-title>
+  </mat-expansion-panel-header>
 
-@for (flatCraft of weapon.craftingrequirements; track flatCraft; let i = $index) {
-  <div class="row">
-    <app-recipe [craftingrequirement]="flatCraft"
-                [totalResourcesCostSignal]="totalResourcePrice[i]"></app-recipe>
-    <app-item-price-display
-      [displayType]="PriceType.SellMin"
-      [prices]="apiWeaponPrices.get(weapon.uniquename) || []"
-      [selectedPricesPerQualitySignals]="selectedPricesSignalMap.get(0)!">
-    </app-item-price-display>
-
-    <div class="column">
-      @for (baseEnchantPrices of selectedPricesSignalMap.get(0); track baseEnchantPrices; let i = $index) {
-        <app-input [value]="selectedPricesSignalMap.get(0)![i]()"/>
-      }
+  <mat-card-content>
+    <div class="header">
+      <app-icon [itemName]="weapon.uniquename"></app-icon>
+      <div class="name">{{ weapon.uniquename }}</div>
     </div>
 
-    <div class="column">
-      @for (quality of selectedPricesSignalMap.get(0)!; track $index; ) {
-        <app-input [displayOnly]="true" [value]="getProfit(0, $index)"/>
-      }
-    </div>
+    @for (flatCraft of weapon.craftingrequirements; track flatCraft; let i = $index) {
+      <div class="row">
+        <app-recipe [craftingrequirement]="flatCraft"
+                    [totalResourcesCostSignal]="totalResourcePrice[i]"></app-recipe>
+        <app-item-price-display
+          [displayType]="PriceType.SellMin"
+          [prices]="apiWeaponPrices.get(weapon.uniquename) || []"
+          [selectedPricesPerQualitySignals]="selectedPricesSignalMap.get(0)!">
+        </app-item-price-display>
 
-    <div class="column">
-      @for (quality of selectedPricesSignalMap.get(0)!; track $index; ) {
-        <app-input [displayOnly]="true" [value]="getProfitPercentage(0, $index)"/>
-      }
-    </div>
-  </div>
-}
+        <div class="column">
+          @for (baseEnchantPrices of selectedPricesSignalMap.get(0); track baseEnchantPrices; let i = $index) {
+            <app-input [value]="selectedPricesSignalMap.get(0)![i]()"/>
+          }
+        </div>
 
-@for (enchantCraft of weapon.enchantments?.enchantment; track enchantCraft.enchantmentlevel) {
-  <app-separator></app-separator>
-  <div class="row">
-    <app-enchant-recipe [enchant]="enchantCraft"
-                        [totalResourcesCostSignal]="totalResourcePrice[parseInt(enchantCraft.enchantmentlevel)]"></app-enchant-recipe>
-    <app-item-price-display
-      [displayType]="PriceType.SellMin"
-      [prices]="apiWeaponPrices.get(weapon.uniquename + '@' + enchantCraft.enchantmentlevel) || []"
-      [selectedPricesPerQualitySignals]="selectedPricesSignalMap.get(parseInt(enchantCraft.enchantmentlevel))!">
-    </app-item-price-display>
-    <div class="column">
-      @for (signal of selectedPricesSignalMap.get(parseInt(enchantCraft.enchantmentlevel))!; track $index; let i = $index) {
-        <app-input [value]="signal()"/>
-      }
-    </div>
+        <div class="column">
+          @for (quality of selectedPricesSignalMap.get(0)!; track $index; ) {
+            <app-input [displayOnly]="true" [value]="getProfit(0, $index)"/>
+          }
+        </div>
 
-    <div class="column">
-      @for (quality of selectedPricesSignalMap.get(parseInt(enchantCraft.enchantmentlevel))!; track $index; ) {
-        <app-input [displayOnly]="true" [value]="getProfit(parseInt(enchantCraft.enchantmentlevel), $index)"/>
-      }
-    </div>
-    <div class="column">
-      @for (quality of selectedPricesSignalMap.get(0)!; track $index; ) {
-        <app-input [displayOnly]="true" [value]="getProfitPercentage(parseInt(enchantCraft.enchantmentlevel), $index)"/>
-      }
-    </div>
-  </div>
-}
+        <div class="column">
+          @for (quality of selectedPricesSignalMap.get(0)!; track $index; ) {
+            <app-input [displayOnly]="true" [value]="getProfitPercentage(0, $index)"/>
+          }
+        </div>
+      </div>
+    }
+
+    @for (enchantCraft of weapon.enchantments?.enchantment; track enchantCraft.enchantmentlevel) {
+      <app-separator></app-separator>
+      <div class="row">
+        <app-enchant-recipe [enchant]="enchantCraft"
+                            [totalResourcesCostSignal]="totalResourcePrice[parseInt(enchantCraft.enchantmentlevel)]"></app-enchant-recipe>
+        <app-item-price-display
+          [displayType]="PriceType.SellMin"
+          [prices]="apiWeaponPrices.get(weapon.uniquename + '@' + enchantCraft.enchantmentlevel) || []"
+          [selectedPricesPerQualitySignals]="selectedPricesSignalMap.get(parseInt(enchantCraft.enchantmentlevel))!">
+        </app-item-price-display>
+        <div class="column">
+          @for (signal of selectedPricesSignalMap.get(parseInt(enchantCraft.enchantmentlevel))!; track $index; let i = $index) {
+            <app-input [value]="signal()"/>
+          }
+        </div>
+
+        <div class="column">
+          @for (quality of selectedPricesSignalMap.get(parseInt(enchantCraft.enchantmentlevel))!; track $index; ) {
+            <app-input [displayOnly]="true" [value]="getProfit(parseInt(enchantCraft.enchantmentlevel), $index)"/>
+          }
+        </div>
+        <div class="column">
+          @for (quality of selectedPricesSignalMap.get(0)!; track $index; ) {
+            <app-input [displayOnly]="true"
+                       [value]="getProfitPercentage(parseInt(enchantCraft.enchantmentlevel), $index)"/>
+          }
+        </div>
+      </div>
+    }
+  </mat-card-content>
+</mat-expansion-panel>
