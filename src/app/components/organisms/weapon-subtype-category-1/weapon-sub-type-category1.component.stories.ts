@@ -5,11 +5,11 @@ import { CommonModule } from '@angular/common';
 import { provideHttpClient } from '@angular/common/http';
 import { AlbionItemsService } from '../../../services/item-static-data-service';
 import { AlbionStaticData, Weapon } from '../../../../assets/albion-static-data';
-import { WeaponSubTypeComponent } from './weapon-sub-type.component';
+import { WeaponSubTypeCategory1Component } from './weapon-sub-type-category1.component';
 
 function filterAxeWeapons(ds: AlbionStaticData): Weapon[] {
   if (Array.isArray(ds?.weapon)) {
-    return ds.weapon.filter(w => w.shopsubcategory2 === 'axe_main_axe');
+    return ds.weapon.filter(w => w.shopsubcategory1 === 'axe');
   }
   return [];
 }
@@ -17,18 +17,18 @@ function filterAxeWeapons(ds: AlbionStaticData): Weapon[] {
 @Component({
   standalone: true,
   selector: 'story-weapon-category-wrapper',
-  imports: [CommonModule, WeaponSubTypeComponent],
+  imports: [CommonModule, WeaponSubTypeCategory1Component],
   template: `
     <ng-container *ngIf="weapons().length > 0; else loading">
-      <app-weapon-sub-type
+      <app-weapon-sub-type-category1
         [weapons]="weapons()"
-        categoryName="Main Axe">
-      </app-weapon-sub-type>
+        categoryName="Axe">
+      </app-weapon-sub-type-category1>
     </ng-container>
     <ng-template #loading>Loading…</ng-template>
   `,
 })
-class StoryWeaponCategoryWrapper implements OnInit {
+class StoryWeaponSubTypeCategory1Component implements OnInit {
   private svc = inject(AlbionItemsService);
   weapons = signal<Weapon[]>([]);
 
@@ -42,8 +42,8 @@ class StoryWeaponCategoryWrapper implements OnInit {
 }
 
 export default {
-  title: 'Organism/WeaponCategoryComponent',
-  component: StoryWeaponCategoryWrapper,
+  title: 'Organism/WeaponSubTypeCategory1Component',
+  component: StoryWeaponSubTypeCategory1Component,
   decorators: [
     applicationConfig({
       providers: [
@@ -51,8 +51,8 @@ export default {
       ],
     }),
   ],
-} as Meta<StoryWeaponCategoryWrapper>;
+} as Meta<StoryWeaponSubTypeCategory1Component>;
 
-type Story = StoryObj<StoryWeaponCategoryWrapper>;
+type Story = StoryObj<StoryWeaponSubTypeCategory1Component>;
 
 export const AxeWeapons: Story = {};

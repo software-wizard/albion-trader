@@ -3,11 +3,12 @@ import {CommonModule} from '@angular/common';
 import {CraftResourceComponent} from "../craft-resource/craft-resource.component";
 import {CraftingRequirements} from "../../../../../assets/albion-static-data";
 import {InputComponent} from "../../../atoms/input/input.component";
+import {SeparatorComponent, SeparatorStyle} from "../../../atoms/separator/separator.component";
 
 @Component({
   selector: 'app-recipe',
   standalone: true,
-  imports: [CommonModule, CraftResourceComponent, InputComponent],
+  imports: [CommonModule, CraftResourceComponent, InputComponent, SeparatorComponent],
   templateUrl: './craft-recipe.component.html',
   styleUrls: ['./craft-recipe.component.scss']
 })
@@ -42,4 +43,6 @@ export class CraftRecipeComponent implements OnChanges {
     this.resourcePricesSignal[index].set($event);
     this.updateResourcesCost();
   }
+
+  protected readonly SeparatorStyle = SeparatorStyle;
 }

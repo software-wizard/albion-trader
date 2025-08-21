@@ -1,0 +1,12 @@
+<div class="weapon-category1">
+  <h2>{{ categoryName }} Category</h2>
+
+  <mat-accordion>
+    @for (group of groupedWeapons; track group.subcategory) {
+      <app-weapon-sub-type
+        [weapons]="group.weapons"
+        [categoryName]="group.subcategory">
+      </app-weapon-sub-type>
+    }
+  </mat-accordion>
+</div>

@@ -2,7 +2,7 @@ import {Component, Input, OnChanges, signal, SimpleChanges, WritableSignal} from
 import {CommonModule} from '@angular/common';
 import {CraftRecipeComponent} from "../recipie/craft-recipe/craft-recipe.component";
 import {Weapon} from "../../../../assets/albion-static-data";
-import {SeparatorComponent} from "../../atoms/separator/separator.component";
+import {SeparatorComponent, SeparatorStyle} from "../../atoms/separator/separator.component";
 import {EnchantRecipeComponent} from "../recipie/enchant-recipe/enchant-recipe.component";
 import {PriceService} from "../../../services/price-service";
 import {PriceEntry, PriceType} from "../../../data-types/albion-price-data";
@@ -63,4 +63,5 @@ export class WeaponComponent implements OnChanges {
   protected readonly PriceType = PriceType;
 
   protected readonly parseInt = parseInt;
+  protected readonly SeparatorStyle = SeparatorStyle;
 }

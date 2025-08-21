@@ -1,6 +1,8 @@
-<div
-  *ngFor="let craftReq of enchant.craftingrequirements; let i = index"
->
-  <app-recipe [craftingrequirement]="craftReq" [totalResourcesCostSignal]="totalResourcesCostSignal"
-  ></app-recipe>
-</div>
+@for (craftReq of enchant.craftingrequirements; track craftReq; let i = $index) {
+  <div>
+    @if (i !== 0) {
+      <app-separator [style]="SeparatorStyle.DASH"></app-separator>
+    }
+    <app-recipe [craftingrequirement]="craftReq" [totalResourcesCostSignal]="totalResourcesCostSignal"></app-recipe>
+  </div>
+}

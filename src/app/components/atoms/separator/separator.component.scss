@@ -1,5 +1,16 @@
 .separator {
   border: none;
-  border-top: 1px dashed #ccc;
   margin: 0.5rem 0;
+
+  &--dash {
+    border-top: 1px dashed #333;
+  }
+
+  &--normal {
+    border-top: 1px solid #333;
+  }
+
+  &--bold {
+    border-top: 3px solid #333;
+  }
 }
