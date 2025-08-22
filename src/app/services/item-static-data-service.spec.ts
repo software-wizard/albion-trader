@@ -14,6 +14,7 @@ describe('AlbionItemsService (real data)', () => {
 
   // it('should load and log first 3 equipment items', (done) => {
   //   const data = itemsData as unknown as AlbionStaticData;
+  //   console.log(data.weapon)
   //   console.log(data.weapon[0].uniquename);
   //   console.log(data.weapon[10].uniquename);
   //   console.log(data.weapon[100].uniquename);
