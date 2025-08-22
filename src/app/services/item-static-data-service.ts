@@ -11,10 +11,16 @@ export class AlbionItemsService {
   loadItems(): Observable<AlbionStaticData> {
     return this.http.get<any>('/assets/items.json').pipe(
       map(data => {
+        console.log('🔍 Raw JSON data:', data);
+        console.log('🔍 data.items:', data.items);
+
         const toReturn = this.normalizeKeys(data.items);
+        console.log('🔍 Normalized data:', toReturn);
+
         return toReturn as AlbionStaticData;
-      }))
-  };
+      })
+    );
+  }
 
   normalizeKeys(obj: any): any {
     if (Array.isArray(obj)) {

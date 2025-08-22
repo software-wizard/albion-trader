@@ -6,6 +6,7 @@ import {LabelComponent} from "../../../atoms/label/label.component";
 import {PriceDisplayComponent} from "../../price-display/price-display.component";
 import {ItemQuality, PriceEntry, PriceType} from "../../../../data-types/albion-price-data";
 import {PriceService} from "../../../../services/price-service";
+import {firstValueFrom} from "rxjs";
 
 @Component({
   selector: 'app-craft-resource',
@@ -24,8 +25,9 @@ export class CraftResourceComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['craftResource']?.currentValue?.uniquename) {
-      this.pricesService.getPrices(this.craftResource.uniquename)
-        .subscribe(prices => this.resourcePrices = prices);
+      firstValueFrom(this.pricesService.getPrices(this.craftResource.uniquename))
+        .then(prices => this.resourcePrices = prices)
+        .catch(error => console.error('Failed to get prices:', error));
     }
   }
 }

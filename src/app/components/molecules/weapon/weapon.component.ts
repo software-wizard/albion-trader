@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, signal, SimpleChanges, WritableSignal} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, signal, SimpleChanges, WritableSignal} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {CraftRecipeComponent} from "../recipie/craft-recipe/craft-recipe.component";
 import {Weapon} from "../../../../assets/albion-static-data";
@@ -11,6 +11,7 @@ import {ItemPriceDisplayComponent} from "../item-price-display/item-price-displa
 import {IconComponent} from "../../atoms/icon/icon.component";
 import {MatCardModule} from '@angular/material/card';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {firstValueFrom} from "rxjs";
 
 
 @Component({
@@ -20,7 +21,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
   templateUrl: './weapon.component.html',
   styleUrls: ['./weapon.component.scss']
 })
-export class WeaponComponent implements OnChanges {
+export class WeaponComponent implements OnChanges, OnInit {
   @Input() weapon!: Weapon;
   apiWeaponPrices: Map<string, PriceEntry[]> = new Map<string, PriceEntry[]>();
   selectedPricesSignalMap: Map<number, WritableSignal<number>[]> = new Map(
@@ -29,37 +30,51 @@ export class WeaponComponent implements OnChanges {
       Array.from({length: 5}, () => signal(0))
     ])
   );
-  totalResourcePrice: WritableSignal<number>[] = [];
+  totalResourcePrice: WritableSignal<number>[] = Array.from({length: 5}, () => signal(0));
 
   constructor(private pricesService: PriceService) {
   }
 
+  ngOnInit() {
+    console.log('🔫 WeaponComponent created for:', this.weapon.uniquename);
+  }
+
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['weapon']?.currentValue) {
-      this.pricesService.getPrices(this.weapon.uniquename)
-        .subscribe(prices => this.apiWeaponPrices.set(this.weapon.uniquename, prices));
+      firstValueFrom(this.pricesService.getPrices(this.weapon.uniquename))
+        .then(prices => this.apiWeaponPrices.set(this.weapon.uniquename, prices))
+        .catch(error => console.error('Failed to get prices:', error));
 
       for (let i = 1; i <= 4; i++) {
         let enchantName = `${this.weapon.uniquename}@${i}`;
-        this.pricesService.getPrices(enchantName)
-          .subscribe(prices => this.apiWeaponPrices.set(enchantName, prices));
-      }
-
-      for (let i = 0; i < this.apiWeaponPrices.size; i++) {
-        this.totalResourcePrice.push(signal(0))
+        firstValueFrom(this.pricesService.getPrices(enchantName))
+          .then(prices => this.apiWeaponPrices.set(enchantName, prices));
       }
     }
   }
 
   getProfit(enchant: number, quality: number) {
-    return this.selectedPricesSignalMap.get(enchant)![quality]() - this.totalResourcePrice[enchant]();
+    const priceSignal = this.selectedPricesSignalMap.get(enchant)?.[quality];
+    const totalCostSignal = this.totalResourcePrice[enchant];
+
+    if (!priceSignal || !totalCostSignal) {
+      return 0;
+    }
+
+    return priceSignal() - totalCostSignal();
   }
 
-  getProfitPercentage(enchant: number, $index: number) {
-    const percentageProfit = this.getProfit(enchant, $index) / this.totalResourcePrice[enchant]() * 100
-    return Math.round(percentageProfit * 10) / 10
-  }
+  getProfitPercentage(enchant: number, index: number) {
+    const profit = this.getProfit(enchant, index);
+    const totalCost = this.totalResourcePrice[enchant]?.();
 
+    if (!totalCost || totalCost === 0) {
+      return 0;
+    }
+
+    const percentageProfit = (profit / totalCost) * 100;
+    return Math.round(percentageProfit * 10) / 10;
+  }
   protected readonly PriceType = PriceType;
 
   protected readonly parseInt = parseInt;

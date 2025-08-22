@@ -76,4 +76,6 @@ export class InputComponent implements OnChanges {
     if (val < 100_000_000) return (val / 1_000_000).toFixed(1).replace(/\.?0+$/, '') + 'm';
     return Math.round(val / 1_000_000) + 'm';
   }
+
+
 }

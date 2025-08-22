@@ -13,7 +13,7 @@
   <div class="two-rows-container" *ngIf="inTwoRows">
     <div class="row">
       @for (cell of cells; track cell.city; let i = $index) {
-        @if (i < (cells?.length) / 2) {
+        @if (i < (cells!.length) / 2) {
           <div class="cell"
                [ngStyle]="{ 'background-color': cityColors[cell.city] }"
                [class.selected]="selectedCity === cell.city"
@@ -25,7 +25,7 @@
     </div>
     <div class="row">
       @for (cell of cells; track cell.city; let i = $index) {
-        @if (i >= (cells?.length) / 2) {
+        @if (i >= (cells!.length) / 2) {
           <div class="cell"
                [ngStyle]="{ 'background-color': cityColors[cell.city] }"
                [class.selected]="selectedCity === cell.city"

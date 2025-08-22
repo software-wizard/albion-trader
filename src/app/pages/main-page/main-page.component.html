@@ -1,6 +1,13 @@
-<ng-container *ngIf="dataEntries?.weapon as weapons">
-  <app-weapon
-    *ngFor="let item of weapons"
-    [weapon]="item"
-  />
-</ng-container>
+<div>
+  <h1>Debug Info</h1>
+  <p>Data loaded: {{ !!dataEntries }}</p>
+  <p>Weapons available: {{ dataEntries?.weapon?.length || 0 }}</p>
+
+  <!-- Debug: pokaż wszystkie bronie bez filtrowania -->
+  <div *ngIf="dataEntries?.weapon as weapons">
+    <p>Total weapons: {{ weapons.length }}</p>
+    <app-weapon-sub-type-category1
+      [weapons]="weapons"
+      categoryName="All Weapons (Debug)">
+    </app-weapon-sub-type-category1>
+  </div>

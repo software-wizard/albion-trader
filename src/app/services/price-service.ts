@@ -19,7 +19,7 @@ import {
 @Injectable({providedIn: 'root'})
 export class PriceService {
   private readonly API_BASE_URL = 'https://europe.albion-online-data.com/api/v2/stats/prices';
-  private readonly MAX_QUERY_LENGTH = 4000;
+  private readonly MAX_QUERY_LENGTH = 3800;
 
   private pricesCache = new Map<string, PriceEntry[]>();
   private isInitialized$ = new BehaviorSubject<boolean>(false);
@@ -69,7 +69,7 @@ export class PriceService {
     // Combine all item maps
     const allMaps = {
       ...MATERIALS_MAP,
-      ...WEAPONS_MAP,
+      // ...WEAPONS_MAP,
       // ...ARMOR_MAP,
       // ...HEAD_MAP,
       // ...SHOES_MAP,
@@ -171,25 +171,26 @@ export class PriceService {
   }
 
   getPrices(uniqueName: string): Observable<PriceEntry[]> {
-    const apiId = PriceService.internalToApiId(uniqueName);
-
-    return this.isInitialized$.pipe(
-      map(initialized => {
-        if (!initialized) {
-          console.warn('PriceService not yet initialized');
-          return [];
-        }
-
-        const cached = this.pricesCache.get(apiId);
-        if (cached) {
-          return cached;
-        }
-
-        // If not in cache, try to fetch individual item
-        this.fetchIndividualItem(apiId);
-        return [];
-      })
-    );
+    return of([]);
+    // const apiId = PriceService.internalToApiId(uniqueName);
+    //
+    // return this.isInitialized$.pipe(
+    //   map(initialized => {
+    //     if (!initialized) {
+    //       console.warn('PriceService not yet initialized');
+    //       return [];
+    //     }
+    //
+    //     const cached = this.pricesCache.get(apiId);
+    //     if (cached) {
+    //       return cached;
+    //     }
+    //
+    //     // If not in cache, try to fetch individual item
+    //     this.fetchIndividualItem(apiId);
+    //     return [];
+    //   })
+    // );
   }
 
   private fetchIndividualItem(itemId: string): void {

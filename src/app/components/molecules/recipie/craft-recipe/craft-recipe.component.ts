@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, signal, SimpleChanges, WritableSignal} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, signal, SimpleChanges, WritableSignal} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {CraftResourceComponent} from "../craft-resource/craft-resource.component";
 import {CraftingRequirements} from "../../../../../assets/albion-static-data";
@@ -35,7 +35,6 @@ export class CraftRecipeComponent implements OnChanges {
         buffer += parseInt(this.craftingrequirement.craftresource[i].count) * this.resourcePricesSignal[i]();
       }
     }
-    console.log('Całkowita suma:', buffer);
     this.totalResourcesCostSignal.set(buffer)
   }
 
@@ -44,5 +43,9 @@ export class CraftRecipeComponent implements OnChanges {
     this.updateResourcesCost();
   }
 
-  protected readonly SeparatorStyle = SeparatorStyle;
+  getTotalResourceCost(index: number): number {
+    const price = this.resourcePricesSignal[index]();
+    const count = parseInt(this.craftingrequirement.craftresource[index].count);
+    return price * count;
+  }
 }
