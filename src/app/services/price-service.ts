@@ -1,17 +1,18 @@
 import {Injectable} from '@angular/core';
-import {Observable, of, BehaviorSubject, map, catchError, forkJoin} from 'rxjs';
+import {BehaviorSubject, catchError, forkJoin, map, Observable, of} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {PriceEntry} from "../data-types/albion-price-data";
 
 export const BASE_MAP: Record<string, string> = {
   ore: 'ORE',
+  wood: 'WOOD',
   fiber: 'FIBER',
   hide: 'HIDE',
+
+  metal_bar: 'METALBAR',
+  plank: 'PLANKS',
   cloth: 'CLOTH',
   leather: 'LEATHER',
-  plank: 'PLANKS',
-  metal_bar: 'METALBAR',
-  stone_block: 'STONEBLOCK'
 };
 
 @Injectable({providedIn: 'root'})
@@ -27,7 +28,7 @@ export class PriceService {
   }
 
   static internalToApiId(id: string): string {
-    if (/(?:^|_)(?:METALBAR|PLANKS)(?:_|$)/.test(id) && !/@\d+$/.test(id)) {
+    if (/(?:^|_)(?:ORE|WOOD|FIBER|HIDE|METALBAR|PLANKS|CLOTH|LEATHER)(?:_|$)/.test(id) && !/@\d+$/.test(id)) {
       const m = id.match(/_LEVEL(\d+)/);
       if (m) return id + '@' + m[1];
     }
