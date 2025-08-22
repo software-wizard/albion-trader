@@ -1,13 +1,22 @@
-<div>
-  <h1>Debug Info</h1>
-  <p>Data loaded: {{ !!dataEntries }}</p>
-  <p>Weapons available: {{ dataEntries?.weapon?.length || 0 }}</p>
+<div class="main-page">
+  <h1>Albion Weapons Price Tracker</h1>
 
-  <!-- Debug: pokaż wszystkie bronie bez filtrowania -->
-  <div *ngIf="dataEntries?.weapon as weapons">
-    <p>Total weapons: {{ weapons.length }}</p>
-    <app-weapon-sub-type-category1
-      [weapons]="weapons"
-      categoryName="All Weapons (Debug)">
-    </app-weapon-sub-type-category1>
+  <div *ngIf="isLoading()" class="loading">
+    <div class="spinner"></div>
+    <p>Loading weapon data...</p>
   </div>
+
+  <div *ngIf="!isLoading()" class="categories-container">
+    <div class="stats">
+      <p>{{ dataEntries?.weapon?.length || 0 }} weapons in {{ weaponCategories().length }} categories</p>
+    </div>
+
+    <!-- ✅ Każda kategoria w osobnym expansion panel -->
+    @for (category of weaponCategories(); track category.name) {
+      <app-weapon-sub-type-category1
+        [weapons]="category.weapons"
+        [categoryName]="category.name">
+      </app-weapon-sub-type-category1>
+    }
+  </div>
+</div>

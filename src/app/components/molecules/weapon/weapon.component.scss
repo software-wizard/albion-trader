@@ -8,19 +8,25 @@
   font-weight: 600;
 }
 
-.row {
+.craft-row {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 1rem;
 }
 
-.column {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
+.craft-section {
+  flex: 2;
 }
 
+.prices-section {
+  flex: 1;
+}
 
-.row + .row {
-  margin-top: 0.5rem;
+.selected-prices-section,
+.profit-section,
+.profit-percentage-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
 }

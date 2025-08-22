@@ -1,20 +1,19 @@
-import {Component, Input, OnChanges, OnInit, signal, SimpleChanges, WritableSignal} from '@angular/core';
+import {Component, Input, OnChanges, signal, SimpleChanges, WritableSignal} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {CraftResourceComponent} from "../craft-resource/craft-resource.component";
 import {CraftingRequirements} from "../../../../../assets/albion-static-data";
 import {InputComponent} from "../../../atoms/input/input.component";
-import {SeparatorComponent, SeparatorStyle} from "../../../atoms/separator/separator.component";
 
 @Component({
   selector: 'app-recipe',
   standalone: true,
-  imports: [CommonModule, CraftResourceComponent, InputComponent, SeparatorComponent],
+  imports: [CommonModule, CraftResourceComponent, InputComponent],
   templateUrl: './craft-recipe.component.html',
   styleUrls: ['./craft-recipe.component.scss']
 })
 export class CraftRecipeComponent implements OnChanges {
   @Input() craftingrequirement!: CraftingRequirements;
-  @Input() totalResourcesCostSignal!: WritableSignal<number>;
+  @Input() totalResourcesCostSignal: WritableSignal<number> = signal(0);
   resourcePricesSignal: WritableSignal<number>[] = [];
 
   ngOnChanges(changes: SimpleChanges): void {

@@ -1,0 +1,111 @@
+.subcategory-panel {
+  margin-bottom: 12px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.weapon-count {
+  font-size: 0.9em;
+  color: #666;
+  margin-left: 8px;
+}
+
+.weapons-container {
+  padding: 16px;
+  background: #fafafa;
+  border-radius: 6px;
+  margin-top: 8px;
+}
+
+// Virtual scroll viewport
+.weapons-viewport {
+  height: 400px;
+  width: 100%;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  background: white;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+
+    &:hover {
+      background: #a8a8a8;
+    }
+  }
+}
+
+// Grid layout for small lists
+.weapons-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.weapon-item {
+  display: block;
+  margin-bottom: 8px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.performance-note {
+  margin-top: 12px;
+  padding: 8px 12px;
+  background: #e8f5e8;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #2e7d32;
+  text-align: center;
+}
+
+.collapsed-subcategory {
+  padding: 16px;
+  text-align: center;
+  color: #666;
+  font-style: italic;
+  background: #f9f9f9;
+  border-radius: 6px;
+  margin: 8px;
+  border: 1px dashed #ddd;
+
+  p {
+    margin: 0;
+  }
+}
+
+// Responsive
+@media (max-width: 768px) {
+  .weapons-viewport {
+    height: 300px;
+  }
+
+  .weapons-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .weapons-container {
+    padding: 8px;
+  }
+
+  .weapon-count {
+    display: block;
+    margin-left: 0;
+    margin-top: 4px;
+  }
+}

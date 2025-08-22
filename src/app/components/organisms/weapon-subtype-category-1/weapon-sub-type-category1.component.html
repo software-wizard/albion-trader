@@ -1,12 +1,30 @@
-<div class="weapon-category1">
-  <h2>{{ categoryName }} Category</h2>
+<mat-expansion-panel (opened)="onExpansionToggle(true)" (closed)="onExpansionToggle(false)">
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      {{ categoryName }}
+      <span class="weapon-count">({{ weapons.length }} weapons)</span>
+    </mat-panel-title>
+    <mat-panel-description>
+      {{ subcategories().length }} subcategories
+    </mat-panel-description>
+  </mat-expansion-panel-header>
 
-  <mat-accordion>
-    @for (group of groupedWeapons; track group.subcategory) {
+  <!-- ✅ Po pierwszym klik: pokazuj tylko subcategorie BEZ weapon componentów -->
+  <div *ngIf="isExpanded()" class="category-content">
+
+    <!-- Subcategorie jako nested expansion panels -->
+    @for (subcategory of subcategories(); track trackBySubcategory($index, subcategory)) {
       <app-weapon-sub-type
-        [weapons]="group.weapons"
-        [categoryName]="group.subcategory">
+        [weapons]="subcategory.weapons"
+        [categoryName]="subcategory.name">
       </app-weapon-sub-type>
     }
-  </mat-accordion>
-</div>
+
+  </div>
+
+  <!-- Loading placeholder gdy panel jest zamknięty -->
+  <div *ngIf="!isExpanded()" class="collapsed-info">
+    <p>Click to expand and see {{ subcategories().length }} subcategories...</p>
+  </div>
+
+</mat-expansion-panel>

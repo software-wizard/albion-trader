@@ -1,9 +1,56 @@
-<mat-expansion-panel>
+<mat-expansion-panel
+  class="subcategory-panel"
+  (opened)="onExpansionToggle(true)"
+  (closed)="onExpansionToggle(false)">
+
   <mat-expansion-panel-header>
-    <mat-panel-title>{{ categoryName }} Weapons ({{ weapons.length }})</mat-panel-title>
+    <mat-panel-title>
+      {{ categoryName }}
+      <span class="weapon-count">({{ weapons.length }} weapons)</span>
+    </mat-panel-title>
   </mat-expansion-panel-header>
 
-  @for (weapon of weapons; track weapon.uniquename) {
-    <app-weapon [weapon]="weapon"/>
-  }
+  <!-- ✅ WeaponComponent tworzy się DOPIERO TUTAJ po 2gim klik! -->
+  <div *ngIf="isExpanded()" class="weapons-container">
+
+    <!-- Virtual scroll dla dużych subcategorii (>10 weapons) -->
+    <div *ngIf="weapons.length > 10; else smallList">
+      <cdk-virtual-scroll-viewport
+        itemSize="280"
+        class="weapons-viewport"
+        [maxBufferPx]="560"
+        [minBufferPx]="280">
+
+        <app-weapon
+          *cdkVirtualFor="let weapon of weapons; trackBy: trackByWeapon"
+          [weapon]="weapon"
+          class="weapon-item">
+        </app-weapon>
+
+      </cdk-virtual-scroll-viewport>
+
+      <div class="performance-note">
+        🚀 Virtual scrolling enabled for {{ weapons.length }} weapons
+      </div>
+    </div>
+
+    <!-- Zwykła lista dla małych subcategorii (≤10 weapons) -->
+    <ng-template #smallList>
+      <div class="weapons-grid">
+        @for (weapon of weapons; track trackByWeapon($index, weapon)) {
+          <app-weapon
+            [weapon]="weapon"
+            class="weapon-item">
+          </app-weapon>
+        }
+      </div>
+    </ng-template>
+
+  </div>
+
+  <!-- Placeholder gdy subcategoria jest zamknięta -->
+  <div *ngIf="!isExpanded()" class="collapsed-subcategory">
+    <p>Click to load {{ weapons.length }} weapons...</p>
+  </div>
+
 </mat-expansion-panel>

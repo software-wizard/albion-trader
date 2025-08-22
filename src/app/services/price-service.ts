@@ -2,19 +2,7 @@ import {Injectable} from '@angular/core';
 import {BehaviorSubject, catchError, forkJoin, map, Observable, of} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {PriceEntry} from "../data-types/albion-price-data";
-import {
-  MATERIALS_MAP,
-  WEAPONS_MAP,
-  ARMOR_MAP,
-  HEAD_MAP,
-  SHOES_MAP,
-  CAPE_MAP,
-  POTION_MAP,
-  FOOD_MAP,
-  MOUNT_MAP,
-  OFFHAND_MAP,
-  OTHER_MAP
-} from './static-item-names';
+import {MATERIALS_MAP, WEAPONS_MAP} from './static-item-names';
 
 @Injectable({providedIn: 'root'})
 export class PriceService {
@@ -23,6 +11,9 @@ export class PriceService {
 
   private pricesCache = new Map<string, PriceEntry[]>();
   private isInitialized$ = new BehaviorSubject<boolean>(false);
+
+  private materialNames = Object.values(MATERIALS_MAP);
+
 
   constructor(private http: HttpClient) {
     this.initializePrices();
@@ -69,7 +60,7 @@ export class PriceService {
     // Combine all item maps
     const allMaps = {
       ...MATERIALS_MAP,
-      // ...WEAPONS_MAP,
+      ...WEAPONS_MAP,
       // ...ARMOR_MAP,
       // ...HEAD_MAP,
       // ...SHOES_MAP,
@@ -145,7 +136,9 @@ export class PriceService {
 
     apiPrices.forEach(apiPrice => {
       // Filter only quality 1 as requested
-      if (apiPrice.quality !== 1) return;
+      if (this.isResourceItem(apiPrice.item_id) && apiPrice.quality !== 1) {
+        return;
+      }
 
       const priceEntry: PriceEntry = {
         item_id: apiPrice.item_id,
@@ -170,27 +163,30 @@ export class PriceService {
     this.pricesCache = groupedPrices;
   }
 
+  private isResourceItem(itemId: string): boolean {
+    return this.materialNames.some(pattern => itemId.includes(pattern));
+  }
+
   getPrices(uniqueName: string): Observable<PriceEntry[]> {
-    return of([]);
-    // const apiId = PriceService.internalToApiId(uniqueName);
-    //
-    // return this.isInitialized$.pipe(
-    //   map(initialized => {
-    //     if (!initialized) {
-    //       console.warn('PriceService not yet initialized');
-    //       return [];
-    //     }
-    //
-    //     const cached = this.pricesCache.get(apiId);
-    //     if (cached) {
-    //       return cached;
-    //     }
-    //
-    //     // If not in cache, try to fetch individual item
-    //     this.fetchIndividualItem(apiId);
-    //     return [];
-    //   })
-    // );
+    const apiId = PriceService.internalToApiId(uniqueName);
+
+    return this.isInitialized$.pipe(
+      map(initialized => {
+        if (!initialized) {
+          console.warn('PriceService not yet initialized');
+          return [];
+        }
+
+        const cached = this.pricesCache.get(apiId);
+        if (cached) {
+          return cached;
+        }
+
+        // If not in cache, try to fetch individual item
+        this.fetchIndividualItem(apiId);
+        return [];
+      })
+    );
   }
 
   private fetchIndividualItem(itemId: string): void {

@@ -12,6 +12,6 @@ import {SeparatorComponent, SeparatorStyle} from "../../../atoms/separator/separ
 })
 export class EnchantRecipeComponent {
   @Input() enchant!: Enchantment;
-  @Input() totalResourcesCostSignal!: WritableSignal<number>;
+  @Input() totalResourcesCostSignal: WritableSignal<number> = signal(0);
   protected readonly SeparatorStyle = SeparatorStyle;
 }
