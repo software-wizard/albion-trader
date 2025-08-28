@@ -5,7 +5,7 @@ import {IconComponent} from "../../../atoms/icon/icon.component";
 import {LabelComponent} from "../../../atoms/label/label.component";
 import {PriceDisplayComponent} from "../../price-display/price-display.component";
 import {ItemQuality, PriceEntry, PriceType} from "../../../../data-types/albion-price-data";
-import {PriceService} from "../../../../services/price-service";
+import {PriceService} from "../../../../services/price-service/price-service";
 import {firstValueFrom} from "rxjs";
 
 @Component({

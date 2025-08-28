@@ -4,7 +4,7 @@ import {CraftResourceComponent} from './craft-resource.component';
 import {PriceEntry} from '../../../../data-types/albion-price-data';
 import data from '../t41-metal-bar-mock.json';
 import {of} from 'rxjs';
-import {PriceService} from "../../../../services/price-service";
+import {PriceService} from "../../../../services/price-service/price-service";
 import {signal} from "@angular/core";
 
 export default {

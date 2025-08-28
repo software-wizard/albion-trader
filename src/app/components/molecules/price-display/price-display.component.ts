@@ -2,6 +2,8 @@ import {Component, Input, OnChanges, SimpleChanges, WritableSignal} from '@angul
 import {City, cityColors, PriceEntry, PriceType} from '../../../data-types/albion-price-data';
 import {CommonModule} from '@angular/common';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {GlobalEventService} from "../../../services/global-event-service/global-event-service";
+import {GlobalEventType} from "../../../services/global-event-service/global-event-types";
 
 interface TableCell {
   city: City;
@@ -27,6 +29,12 @@ export class PriceDisplayComponent implements OnChanges {
   protected readonly cityColors = cityColors;
   protected cells?: TableCell[];
   protected selectedCity?: City;
+
+  constructor(eventService: GlobalEventService) {
+    eventService.on(GlobalEventType.RESOURCES_CITY_CHANGED).subscribe(c => {
+      this.onCellClick(c.city)
+    })
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['prices'] || changes['displayType']) {

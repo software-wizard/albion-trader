@@ -4,7 +4,7 @@ import {of} from 'rxjs';
 import {CraftRecipeComponent} from './craft-recipe.component';
 import metalbarData from '../t41-metal-bar-mock.json';
 import plankData from '../t41-plank-mock.json';
-import {PriceService} from "../../../../services/price-service";
+import {PriceService} from "../../../../services/price-service/price-service";
 import {PriceEntry} from "../../../../data-types/albion-price-data";
 import {signal} from "@angular/core";
 

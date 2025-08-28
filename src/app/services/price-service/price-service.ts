@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, catchError, forkJoin, map, Observable, of} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
-import {PriceEntry} from "../data-types/albion-price-data";
+import {PriceEntry} from "../../data-types/albion-price-data";
 import {MATERIALS_MAP, WEAPONS_MAP} from './static-item-names';
 
 @Injectable({providedIn: 'root'})
@@ -95,7 +95,10 @@ export class PriceService {
       return of(this.pricesCache.size);
     }
 
-    console.log(`📦 Fetching ${itemsToFetch.length} missing items (${itemIds.length - itemsToFetch.length} already cached)`);
+    if (itemsToFetch.length > 0) {
+      console.log(`📦 Fetching ${itemsToFetch.length} missing items (${itemIds.length - itemsToFetch.length} already cached)`);
+      console.log(itemsToFetch);
+    }
 
     const chunks = this.chunkItems(itemsToFetch, this.MAX_QUERY_LENGTH);
     console.log(`🔄 Created ${chunks.length} API request chunks`);

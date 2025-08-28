@@ -4,7 +4,7 @@ import {CraftRecipeComponent} from "../recipie/craft-recipe/craft-recipe.compone
 import {Weapon} from "../../../../assets/albion-static-data";
 import {SeparatorComponent, SeparatorStyle} from "../../atoms/separator/separator.component";
 import {EnchantRecipeComponent} from "../recipie/enchant-recipe/enchant-recipe.component";
-import {PriceService} from "../../../services/price-service";
+import {PriceService} from "../../../services/price-service/price-service";
 import {PriceEntry, PriceType} from "../../../data-types/albion-price-data";
 import {InputComponent} from "../../atoms/input/input.component";
 import {ItemPriceDisplayComponent} from "../item-price-display/item-price-display.component";

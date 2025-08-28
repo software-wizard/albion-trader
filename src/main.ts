@@ -3,7 +3,7 @@ import { AppComponent } from './app/app.component';
 import { provideHttpClient } from '@angular/common/http';
 import { importProvidersFrom, APP_INITIALIZER } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PriceService } from './app/services/price-service';
+import { PriceService } from './app/services/price-service/price-service';
 import { firstValueFrom, filter, take, timeout, catchError, of } from 'rxjs';
 
 // Factory function that will wait for PriceService initialization

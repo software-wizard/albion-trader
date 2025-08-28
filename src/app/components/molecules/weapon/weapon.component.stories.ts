@@ -5,10 +5,10 @@ import {provideHttpClient} from '@angular/common/http';
 import { MatCardModule } from '@angular/material/card';
 
 
-import {AlbionItemsService} from '../../../services/item-static-data-service';
+import {AlbionItemsService} from '../../../services/item-static-data-service/item-static-data-service';
 import {AlbionStaticData, Weapon} from '../../../../assets/albion-static-data';
 import {WeaponComponent} from './weapon.component';
-import {PriceService} from '../../../services/price-service';
+import {PriceService} from '../../../services/price-service/price-service';
 import {of} from 'rxjs';
 import plankData from './t41-plank-mock.json';
 import metalbarData from './t41-metal-bar-mock.json';

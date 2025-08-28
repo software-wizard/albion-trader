@@ -1,8 +1,8 @@
 import {TestBed} from '@angular/core/testing';
 import {AlbionItemsService} from './item-static-data-service';
 
-import * as itemsData from '../../assets/items.json';
-import {AlbionStaticData} from "../../assets/albion-static-data";
+import * as itemsData from '../../../assets/items.json';
+import {AlbionStaticData} from "../../../assets/albion-static-data";
 
 describe('AlbionItemsService (real data)', () => {
 

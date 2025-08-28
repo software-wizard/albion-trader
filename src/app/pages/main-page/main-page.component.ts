@@ -1,11 +1,12 @@
 import {Component, OnInit, signal} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {firstValueFrom} from 'rxjs';
-import {AlbionItemsService} from "../../services/item-static-data-service";
+import {AlbionItemsService} from "../../services/item-static-data-service/item-static-data-service";
 import {AlbionStaticData, Weapon} from "../../../assets/albion-static-data";
 import {
   WeaponSubTypeCategory1Component
 } from "../../components/organisms/weapon-subtype-category-1/weapon-sub-type-category1.component";
+import {HeaderComponent} from "../../components/organisms/header/header.component";
 
 interface WeaponCategory {
   name: string;
@@ -16,7 +17,7 @@ interface WeaponCategory {
 @Component({
   selector: 'app-main-page',
   standalone: true,
-  imports: [CommonModule, WeaponSubTypeCategory1Component],
+  imports: [CommonModule, WeaponSubTypeCategory1Component, HeaderComponent],
   templateUrl: './main-page.component.html',
   styleUrl: './main-page.component.scss'
 })

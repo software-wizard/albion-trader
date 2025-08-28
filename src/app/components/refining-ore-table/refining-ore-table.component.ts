@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { OreRefiningMockService, ApiPriceEntry } from '../../services/ore-refining-mock.service';
+import { OreRefiningMockService, ApiPriceEntry } from '../../services/ore-refining-mock.service/ore-refining-mock.service';
 
 @Component({
   selector: 'app-refining-ore-table',
