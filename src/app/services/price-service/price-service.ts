@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {BehaviorSubject, catchError, forkJoin, map, Observable, of} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {PriceEntry} from "../../data-types/albion-price-data";
-import {MATERIALS_MAP, WEAPONS_MAP} from './static-item-names';
+import {ARTEFACT_MAP, MATERIALS_MAP, WEAPONS_MAP, WEAPONS_MAP_SHORT} from './static-item-names';
 
 @Injectable({providedIn: 'root'})
 export class PriceService {
@@ -50,7 +50,9 @@ export class PriceService {
     // Combine all item maps
     const allMaps = {
       ...MATERIALS_MAP,
-      ...WEAPONS_MAP,
+      ...WEAPONS_MAP_SHORT,
+      // ...WEAPONS_MAP,
+      // ...ARTEFACT_MAP,
       // ...ARMOR_MAP,
       // ...HEAD_MAP,
       // ...SHOES_MAP,

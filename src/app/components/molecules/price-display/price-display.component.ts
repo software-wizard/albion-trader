@@ -23,6 +23,8 @@ export class PriceDisplayComponent implements OnChanges {
   @Input() displayType!: PriceType;
   @Input() selectedPriceSignal!: WritableSignal<number>;
   @Input() inTwoRows: boolean = false;
+  @Input() eventToObserve!: GlobalEventType;
+
   readonly citiesOrder = [
     City.FortSterling, City.Lymhurst, City.Bridgewatch, City.Martlock, City.Thetford, City.BlackMarket,
   ];
@@ -30,15 +32,17 @@ export class PriceDisplayComponent implements OnChanges {
   protected cells?: TableCell[];
   protected selectedCity?: City;
 
-  constructor(eventService: GlobalEventService) {
-    eventService.on(GlobalEventType.RESOURCES_CITY_CHANGED).subscribe(c => {
-      this.onCellClick(c.city)
-    })
+  constructor(private eventService: GlobalEventService) {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['prices'] || changes['displayType']) {
       this.cells = this.updateTable();
+    }
+    if (changes['eventToObserve']) {
+      this.eventService.on(this.eventToObserve).subscribe(c => {
+        this.onCellClick((c as any).city);
+      })
     }
   }
 
@@ -55,6 +59,7 @@ export class PriceDisplayComponent implements OnChanges {
   onCellClick(city: City): void {
     this.selectedCity = city;
     this.selectedPriceSignal.set(this.getPriceForSelectedCity())
+    console.log(`setted ${this.selectedPriceSignal}`);
   }
 
   getPriceForSelectedCity(): number {

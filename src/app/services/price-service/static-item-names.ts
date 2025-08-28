@@ -13,6 +13,19 @@ export const MATERIALS_MAP: Record<string, string> = {
 };
 
 // Bronie
+export const WEAPONS_MAP_SHORT: Record<string, string> = {
+  '2h_bow': '2H_BOW',
+  '2h_bow_avalon': '2H_BOW_AVALON',
+  '2h_bow_crystal': '2H_BOW_CRYSTAL',
+  '2h_bow_hell': '2H_BOW_HELL',
+  '2h_bow_keeper': '2H_BOW_KEEPER',
+  '2h_crossbow': '2H_CROSSBOW',
+  '2h_crossbow_cannon_avalon': '2H_CROSSBOW_CANNON_AVALON',
+  '2h_crossbowlarge': '2H_CROSSBOWLARGE',
+  '2h_crossbowlarge_morgana': '2H_CROSSBOWLARGE_MORGANA',
+  '2h_longbow': '2H_LONGBOW',
+  '2h_longbow_undead': '2H_LONGBOW_UNDEAD',
+}
 export const WEAPONS_MAP: Record<string, string> = {
   '2h_arcane_ringpair_avalon': '2H_ARCANE_RINGPAIR_AVALON',
   '2h_arcanestaff': '2H_ARCANESTAFF',
@@ -401,20 +414,7 @@ export const OFFHAND_MAP: Record<string, string> = {
   'off_towershield_undead': 'OFF_TOWERSHIELD_UNDEAD',
 };
 
-// Inne (wszystko co nie pasuje do powyższych kategorii)
-export const OTHER_MAP: Record<string, string> = {
-  'agaric': 'AGARIC',
-  'alchemy_common': 'ALCHEMY_COMMON',
-  'alchemy_extract_level1': 'ALCHEMY_EXTRACT_LEVEL1',
-  'alchemy_extract_level2': 'ALCHEMY_EXTRACT_LEVEL2',
-  'alchemy_extract_level3': 'ALCHEMY_EXTRACT_LEVEL3',
-  'alchemy_rare_direbear': 'ALCHEMY_RARE_DIREBEAR',
-  'alchemy_rare_eagle': 'ALCHEMY_RARE_EAGLE',
-  'alchemy_rare_elemental': 'ALCHEMY_RARE_ELEMENTAL',
-  'alchemy_rare_ent': 'ALCHEMY_RARE_ENT',
-  'alchemy_rare_imp': 'ALCHEMY_RARE_IMP',
-  'alchemy_rare_panther': 'ALCHEMY_RARE_PANTHER',
-  'alchemy_rare_werewolf': 'ALCHEMY_RARE_WEREWOLF',
+export const ARTEFACT_MAP: Record<string, string> = {
   'artefact_2h_arcane_ringpair_avalon': 'ARTEFACT_2H_ARCANE_RINGPAIR_AVALON',
   'artefact_2h_arcanestaff_crystal': 'ARTEFACT_2H_ARCANESTAFF_CRYSTAL',
   'artefact_2h_arcanestaff_hell': 'ARTEFACT_2H_ARCANESTAFF_HELL',
@@ -565,6 +565,22 @@ export const OTHER_MAP: Record<string, string> = {
   'artefact_token_favor_2': 'ARTEFACT_TOKEN_FAVOR_2',
   'artefact_token_favor_3': 'ARTEFACT_TOKEN_FAVOR_3',
   'artefact_token_favor_4': 'ARTEFACT_TOKEN_FAVOR_4',
+}
+
+// Inne (wszystko co nie pasuje do powyższych kategorii)
+export const OTHER_MAP: Record<string, string> = {
+  'agaric': 'AGARIC',
+  'alchemy_common': 'ALCHEMY_COMMON',
+  'alchemy_extract_level1': 'ALCHEMY_EXTRACT_LEVEL1',
+  'alchemy_extract_level2': 'ALCHEMY_EXTRACT_LEVEL2',
+  'alchemy_extract_level3': 'ALCHEMY_EXTRACT_LEVEL3',
+  'alchemy_rare_direbear': 'ALCHEMY_RARE_DIREBEAR',
+  'alchemy_rare_eagle': 'ALCHEMY_RARE_EAGLE',
+  'alchemy_rare_elemental': 'ALCHEMY_RARE_ELEMENTAL',
+  'alchemy_rare_ent': 'ALCHEMY_RARE_ENT',
+  'alchemy_rare_imp': 'ALCHEMY_RARE_IMP',
+  'alchemy_rare_panther': 'ALCHEMY_RARE_PANTHER',
+  'alchemy_rare_werewolf': 'ALCHEMY_RARE_WEREWOLF',
   'backpack_gatherer_fiber': 'BACKPACK_GATHERER_FIBER',
   'backpack_gatherer_fish': 'BACKPACK_GATHERER_FISH',
   'backpack_gatherer_hide': 'BACKPACK_GATHERER_HIDE',

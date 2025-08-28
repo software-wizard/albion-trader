@@ -3,6 +3,7 @@ import {ItemQuality, PriceEntry, PriceType} from '../../../data-types/albion-pri
 import {CommonModule} from '@angular/common';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {PriceDisplayComponent} from "../price-display/price-display.component";
+import {GlobalEventType} from "../../../services/global-event-service/global-event-types";
 
 @Component({
   selector: 'app-item-price-display',
@@ -38,4 +39,5 @@ export class ItemPriceDisplayComponent implements OnChanges {
   }
 
   protected readonly PriceType = PriceType;
+  protected readonly GlobalEventType = GlobalEventType;
 }

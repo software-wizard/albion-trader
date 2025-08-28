@@ -5,6 +5,7 @@
         [displayType]="PriceType.SellMin"
         [prices]="pricesMap.get(i+1)!"
         [selectedPriceSignal]="selectedPricesPerQualitySignals[i]"
+        [eventToObserve]="GlobalEventType.ITEMS_CITY_CHANGED"
       />
     }
   </div>

@@ -1,7 +1,6 @@
-import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
-import {GlobalEventData, GlobalEventType} from './global-event-types'
+import {Injectable} from '@angular/core';
+import {map, Observable, ReplaySubject} from 'rxjs';
+import {GlobalEventData, GlobalEventType} from './global-event-types';
 
 interface GlobalEventPayload<T extends GlobalEventType> {
   type: T;
@@ -12,42 +11,37 @@ interface GlobalEventPayload<T extends GlobalEventType> {
   providedIn: 'root'
 })
 export class GlobalEventService {
-  private eventSubject = new Subject<GlobalEventPayload<any>>();
+  private subjects = new Map<GlobalEventType, ReplaySubject<any>>();
 
-  /**
-   * Emit global event with data
-   */
+  private getOrCreateSubject<T extends GlobalEventType>(type: T): ReplaySubject<GlobalEventData[T]> {
+    if (!this.subjects.has(type)) {
+      this.subjects.set(type, new ReplaySubject<GlobalEventData[T]>(1));
+    }
+    return this.subjects.get(type)!;
+  }
+
   emit<T extends GlobalEventType>(type: T, data: GlobalEventData[T]): void {
-    const payload: GlobalEventPayload<T> = {
-      type,
-      data,
-    };
-
+    const payload: GlobalEventPayload<T> = {type, data};
     console.log(`🌐 Global event emitted:`, payload);
-    this.eventSubject.next(payload);
+    this.getOrCreateSubject(type).next(data);
   }
 
-  /**
-   * Listen to specific global event type
-   */
   on<T extends GlobalEventType>(type: T): Observable<GlobalEventData[T]> {
-    return this.eventSubject.pipe(
-      filter((payload): payload is GlobalEventPayload<T> => payload.type === type),
-      map(payload => payload.data)
-    );
+    return this.getOrCreateSubject(type).asObservable();
   }
 
-  /**
-   * Listen to all global events (useful for debugging)
-   */
   onAll(): Observable<GlobalEventPayload<any>> {
-    return this.eventSubject.asObservable();
+    const merged = Array.from(this.subjects.entries()).map(([type, subj]) =>
+      subj.asObservable().pipe(map(data => ({type, data})))
+    );
+    return new Observable(observer => {
+      const subs = merged.map(obs => obs.subscribe(observer));
+      return () => subs.forEach(s => s.unsubscribe());
+    });
   }
 
-  /**
-   * Complete the event bus (cleanup)
-   */
   destroy(): void {
-    this.eventSubject.complete();
+    this.subjects.forEach(subj => subj.complete());
+    this.subjects.clear();
   }
 }

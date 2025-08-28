@@ -7,6 +7,7 @@ import {PriceDisplayComponent} from "../../price-display/price-display.component
 import {ItemQuality, PriceEntry, PriceType} from "../../../../data-types/albion-price-data";
 import {PriceService} from "../../../../services/price-service/price-service";
 import {firstValueFrom} from "rxjs";
+import {GlobalEventType} from "../../../../services/global-event-service/global-event-types";
 
 @Component({
   selector: 'app-craft-resource',
@@ -30,4 +31,6 @@ export class CraftResourceComponent implements OnChanges {
         .catch(error => console.error('Failed to get prices:', error));
     }
   }
+
+  protected readonly GlobalEventType = GlobalEventType;
 }

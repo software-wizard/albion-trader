@@ -24,6 +24,12 @@ export class HeaderComponent {
   };
 
   constructor(private eventService: GlobalEventService) {
+    eventService.emit(GlobalEventType.RRR_CHANGED, {value: this.rrrValueSignal()});
+    let resValue = this.resourcesPriceSignal();
+    let itemValue = this.itemPriceSignal();
+    eventService.emit(GlobalEventType.ITEMS_CITY_CHANGED, {city: itemValue});
+    eventService.emit(GlobalEventType.RESOURCES_CITY_CHANGED, {city: resValue});
+
     effect(() => {
       const v = this.rrrValueSignal();
       if (this.init.rrr) {
