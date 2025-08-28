@@ -65,7 +65,7 @@ export interface Weapon {
   SocketPreset: SocketPreset;
   craftingspelllist: CraftingSpellList;
   AudioInfo: AudioInfo;
-  enchantments: Enchantments;
+  enchantments?: Enchantments;
 }
 
 export interface CraftingRequirements {

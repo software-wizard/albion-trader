@@ -11,13 +11,7 @@ export class PriceService {
 
   private pricesCache = new Map<string, PriceEntry[]>();
   private isInitialized$ = new BehaviorSubject<boolean>(false);
-
   private materialNames = Object.values(MATERIALS_MAP);
-
-
-  constructor(private http: HttpClient) {
-    this.initializePrices();
-  }
 
   static internalToApiId(id: string): string {
     // For resources like ORE_LEVEL1 -> ORE_LEVEL1@1
@@ -28,27 +22,23 @@ export class PriceService {
     return id;
   }
 
+  constructor(private http: HttpClient) {
+    this.initializePrices();
+  }
+
   private initializePrices(): void {
-    const itemsToFetch = this.generateItemsList();
-    console.log(`🔍 Generating prices for ${itemsToFetch.length} items`);
+    const allItems = this.generateItemsList();
+    console.log(`🔍 Initializing prices for ${allItems.length} items`);
 
-    const chunks = this.chunkItems(itemsToFetch, this.MAX_QUERY_LENGTH);
-    console.log(`📦 Created ${chunks.length} chunks for API queries`);
-
-    const requests = chunks.map(chunk =>
-      this.fetchPricesChunk(chunk).pipe(
-        catchError(error => {
-          console.error('Error fetching price chunk:', error);
-          return of([]);
-        })
-      )
-    );
-
-    forkJoin(requests).subscribe(results => {
-      const allPrices = results.flat();
-      this.cachePrices(allPrices);
-      this.isInitialized$.next(true);
-      console.log(`✅ Initialized prices for ${allPrices.length} items`);
+    this.fetchAndCachePrices(allItems).subscribe({
+      next: (cachedItemsCount) => {
+        this.isInitialized$.next(true);
+        console.log(`✅ Initialized prices for ${cachedItemsCount} items`);
+      },
+      error: (error) => {
+        console.error('Failed to initialize prices:', error);
+        this.isInitialized$.next(true);
+      }
     });
   }
 
@@ -76,17 +66,13 @@ export class PriceService {
       tiers.forEach(tier => {
         enchantLevels.forEach(enchantLevel => {
           if (enchantLevel === 0) {
-            // Base item without enchant
             items.push(`${tier}_${baseName}`);
           } else {
-            // Check if it's a resource (materials)
             const isResource = Object.values(MATERIALS_MAP).includes(baseName);
 
             if (isResource) {
-              // For resources: T4_ORE_LEVEL1@1
               items.push(`${tier}_${baseName}_LEVEL${enchantLevel}@${enchantLevel}`);
             } else {
-              // For weapons/armor/etc: T4_2H_HAMMER_CRYSTAL@1
               items.push(`${tier}_${baseName}@${enchantLevel}`);
             }
           }
@@ -95,6 +81,73 @@ export class PriceService {
     });
 
     return items;
+  }
+
+  /**
+   * Single method responsible for fetching and caching prices
+   * Checks cache first, only fetches missing items
+   */
+  private fetchAndCachePrices(itemIds: string[]): Observable<number> {
+    const itemsToFetch = itemIds.filter(itemId => !this.pricesCache.has(itemId));
+
+    if (itemsToFetch.length === 0) {
+      console.log('📋 All items already cached, skipping fetch');
+      return of(this.pricesCache.size);
+    }
+
+    console.log(`📦 Fetching ${itemsToFetch.length} missing items (${itemIds.length - itemsToFetch.length} already cached)`);
+
+    const chunks = this.chunkItems(itemsToFetch, this.MAX_QUERY_LENGTH);
+    console.log(`🔄 Created ${chunks.length} API request chunks`);
+
+    const requests = chunks.map(chunk =>
+      this.fetchPricesChunk(chunk).pipe(
+        catchError(error => {
+          console.error('Error fetching price chunk:', error);
+          return of([]);
+        })
+      )
+    );
+
+    return forkJoin(requests.length > 0 ? requests : [of([])]).pipe(
+      map(results => {
+        const allPrices = results.flat();
+        this.updateCache(allPrices);
+        return this.pricesCache.size;
+      })
+    );
+  }
+
+  /**
+   * Single method responsible for updating cache
+   * Only this method writes to pricesCache
+   */
+  private updateCache(apiPrices: PriceEntry[]): void {
+    const groupedPrices = new Map<string, PriceEntry[]>();
+
+    apiPrices.forEach(apiPrice => {
+      const priceEntry = apiPrice as PriceEntry;
+
+      if (!groupedPrices.has(apiPrice.item_id)) {
+        groupedPrices.set(apiPrice.item_id, []);
+      }
+      groupedPrices.get(apiPrice.item_id)!.push(priceEntry);
+    });
+
+    groupedPrices.forEach((prices, itemId) => {
+      this.pricesCache.set(itemId, prices);
+    });
+
+    console.log(`💾 Updated cache with ${groupedPrices.size} new items (total: ${this.pricesCache.size})`);
+  }
+
+  private fetchPricesChunk(items: string[]): Observable<PriceEntry[]> {
+    const itemsParam = items.join(',');
+    const url = `${this.API_BASE_URL}/${itemsParam}`;
+
+    return this.http.get<PriceEntry[]>(url).pipe(
+      map(response => response || [])
+    );
   }
 
   private chunkItems(items: string[], maxLength: number): string[][] {
@@ -122,47 +175,6 @@ export class PriceService {
     return chunks;
   }
 
-  private fetchPricesChunk(items: string[]): Observable<PriceEntry[]> {
-    const itemsParam = items.join(',');
-    const url = `${this.API_BASE_URL}/${itemsParam}`;
-
-    return this.http.get<PriceEntry[]>(url).pipe(
-      map(response => response || [])
-    );
-  }
-
-  private cachePrices(apiPrices: PriceEntry[]): void {
-    const groupedPrices = new Map<string, PriceEntry[]>();
-
-    apiPrices.forEach(apiPrice => {
-      // Filter only quality 1 as requested
-      if (this.isResourceItem(apiPrice.item_id) && apiPrice.quality !== 1) {
-        return;
-      }
-
-      const priceEntry: PriceEntry = {
-        item_id: apiPrice.item_id,
-        city: apiPrice.city as any, // Type assertion for City enum
-        quality: apiPrice.quality as any, // Type assertion for ItemQuality enum
-        sell_price_min: apiPrice.sell_price_min,
-        sell_price_min_date: apiPrice.sell_price_min_date,
-        sell_price_max: apiPrice.sell_price_max,
-        sell_price_max_date: apiPrice.sell_price_max_date,
-        buy_price_min: apiPrice.buy_price_min,
-        buy_price_min_date: apiPrice.buy_price_min_date,
-        buy_price_max: apiPrice.buy_price_max,
-        buy_price_max_date: apiPrice.buy_price_max_date
-      };
-
-      if (!groupedPrices.has(apiPrice.item_id)) {
-        groupedPrices.set(apiPrice.item_id, []);
-      }
-      groupedPrices.get(apiPrice.item_id)!.push(priceEntry);
-    });
-
-    this.pricesCache = groupedPrices;
-  }
-
   private isResourceItem(itemId: string): boolean {
     return this.materialNames.some(pattern => itemId.includes(pattern));
   }
@@ -176,42 +188,21 @@ export class PriceService {
           console.warn('PriceService not yet initialized');
           return [];
         }
-
         const cached = this.pricesCache.get(apiId);
         if (cached) {
           return cached;
         }
 
-        // If not in cache, try to fetch individual item
-        this.fetchIndividualItem(apiId);
+        this.fetchAndCachePrices([apiId]).subscribe();
         return [];
       })
     );
-  }
-
-  private fetchIndividualItem(itemId: string): void {
-    const url = `${this.API_BASE_URL}/${itemId}`;
-
-    this.http.get<PriceEntry[]>(url).pipe(
-      catchError(error => {
-        console.error(`Error fetching individual item ${itemId}:`, error);
-        return of([]);
-      })
-    ).subscribe(response => {
-      this.cachePrices(response);
-    });
-  }
-
-  // Method for testing/debugging
-  getAllCachedPrices(): Map<string, PriceEntry[]> {
-    return new Map(this.pricesCache);
   }
 
   isInitialized(): Observable<boolean> {
     return this.isInitialized$.asObservable();
   }
 
-  // Method to get all possible items for testing
   getAllPossibleItems(): string[] {
     return this.generateItemsList();
   }
