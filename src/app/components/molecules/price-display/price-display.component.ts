@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, SimpleChanges, WritableSignal} from '@angular/core';
+import {ChangeDetectorRef, Component, Input, OnChanges, SimpleChanges, WritableSignal} from '@angular/core';
 import {City, cityColors, PriceEntry, PriceType} from '../../../data-types/albion-price-data';
 import {CommonModule} from '@angular/common';
 import {MatTooltipModule} from '@angular/material/tooltip';
@@ -31,8 +31,9 @@ export class PriceDisplayComponent implements OnChanges {
   protected readonly cityColors = cityColors;
   protected cells?: TableCell[];
   protected selectedCity?: City;
+  private pendingCitySelection?: City; // Dodane dla race condition
 
-  constructor(private eventService: GlobalEventService) {
+  constructor(private eventService: GlobalEventService, private cdr: ChangeDetectorRef) {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -41,25 +42,36 @@ export class PriceDisplayComponent implements OnChanges {
     }
     if (changes['eventToObserve']) {
       this.eventService.on(this.eventToObserve).subscribe(c => {
-        this.onCellClick((c as any).city);
+        if (this.cells && this.cells.length > 0 && this.prices && this.prices.length > 0) {
+          this.onCellClick((c as any).city);
+        } else {
+          this.pendingCitySelection = (c as any).city;
+        }
       })
     }
   }
 
   updateTable(): TableCell[] {
-    return this.citiesOrder.map(city => {
+    const cells = this.citiesOrder.map(city => {
       const entry = this.prices.find(d => d.city === city);
       const value = entry?.[this.displayType] ?? 0;
       const dateKey = (this.displayType + '_date') as keyof PriceEntry;
       const date = entry?.[dateKey] ?? '';
       return {city, price: value, date};
     });
+
+    if (this.pendingCitySelection && cells.length > 0 && this.prices && this.prices.length > 0) {
+      this.onCellClick(this.pendingCitySelection);
+      this.pendingCitySelection = undefined;
+    }
+
+    return cells;
   }
 
   onCellClick(city: City): void {
     this.selectedCity = city;
-    this.selectedPriceSignal.set(this.getPriceForSelectedCity())
-    console.log(`setted ${this.selectedPriceSignal}`);
+    this.selectedPriceSignal.set(this.getPriceForSelectedCity());
+    this.cdr.detectChanges();
   }
 
   getPriceForSelectedCity(): number {

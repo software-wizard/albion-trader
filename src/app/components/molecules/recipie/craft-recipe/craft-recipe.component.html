@@ -8,8 +8,7 @@
         />
         <div class="recipes-col">
           <app-input [displayOnly]="true"
-                     [value]="getTotalResourceCost(i)"
-                     (valueChange)="updateResourcesCost()"/>
+                     [value]="getTotalResourceCost(i)"/>
           <app-input [value]="resourcePricesSignal[i]()" (valueChange)="priceChangedManually(i, $event)"/>
         </div>
       </div>

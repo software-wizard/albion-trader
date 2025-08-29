@@ -24,6 +24,7 @@ export class CraftResourceComponent implements OnChanges {
 
   constructor(private pricesService: PriceService) {}
 
+
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['craftResource']?.currentValue?.uniquename) {
       firstValueFrom(this.pricesService.getPrices(this.craftResource.uniquename))

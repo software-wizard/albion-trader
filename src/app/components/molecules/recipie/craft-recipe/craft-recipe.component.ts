@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, signal, SimpleChanges, WritableSignal} from '@angular/core';
+import {Component, computed, effect, Input, OnChanges, signal, SimpleChanges, WritableSignal} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {CraftResourceComponent} from "../craft-resource/craft-resource.component";
 import {CraftingRequirements} from "../../../../../assets/albion-static-data";
@@ -16,6 +16,28 @@ export class CraftRecipeComponent implements OnChanges {
   @Input() totalResourcesCostSignal: WritableSignal<number> = signal(0);
   resourcePricesSignal: WritableSignal<number>[] = [];
 
+  // Computed signal który automatycznie się przeliczy
+  private totalCost = computed(() => {
+    if (!this.craftingrequirement || this.resourcePricesSignal.length === 0) return 0;
+
+    let buffer = 0;
+    for (let i = 0; i < this.resourcePricesSignal.length; i++) {
+      if (this.resourcePricesSignal[i]) {
+        const price = this.resourcePricesSignal[i]();
+        const count = parseInt(this.craftingrequirement.craftresource[i].count);
+        buffer += count * price;
+      }
+    }
+    return buffer;
+  });
+
+  constructor() {
+    // Effect może być w konstruktorze - będzie nasłuchiwał computed
+    effect(() => {
+      this.totalResourcesCostSignal.set(this.totalCost());
+    });
+  }
+
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['craftingrequirement']) {
       this.resourcePricesSignal = [];
@@ -25,21 +47,11 @@ export class CraftRecipeComponent implements OnChanges {
     }
   }
 
-  updateResourcesCost() {
-    if (!this.craftingrequirement || this.resourcePricesSignal.length === 0) return;
-
-    let buffer = 0;
-    for (let i = 0; i < this.craftingrequirement.craftresource.length; i++) {
-      if (this.resourcePricesSignal[i]) {
-        buffer += parseInt(this.craftingrequirement.craftresource[i].count) * this.resourcePricesSignal[i]();
-      }
-    }
-    this.totalResourcesCostSignal.set(buffer)
-  }
+  // Usuń updateResourcesCost() - nie jest już potrzebne
 
   priceChangedManually(index: number, $event: number) {
     this.resourcePricesSignal[index].set($event);
-    this.updateResourcesCost();
+    // updateResourcesCost() wywołuje się automatycznie przez computed + effect
   }
 
   getTotalResourceCost(index: number): number {

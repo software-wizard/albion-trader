@@ -12,6 +12,8 @@ import {IconComponent} from "../../atoms/icon/icon.component";
 import {MatCardModule} from '@angular/material/card';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {firstValueFrom} from "rxjs";
+import {GlobalEventService} from "../../../services/global-event-service/global-event-service";
+import {GlobalEventType} from "../../../services/global-event-service/global-event-types";
 
 
 @Component({
@@ -31,12 +33,15 @@ export class WeaponComponent implements OnChanges, OnInit {
     ])
   );
   totalResourcePrice: WritableSignal<number>[] = Array.from({length: 5}, () => signal(0));
+  private rrr = 0;
 
-  constructor(private pricesService: PriceService) {
+  constructor(private pricesService: PriceService, private eventService: GlobalEventService) {
   }
 
   ngOnInit() {
-    console.log('🔫 WeaponComponent created for:', this.weapon.uniquename);
+    this.eventService.on(GlobalEventType.RRR_CHANGED).subscribe(rrr => {
+      this.rrr = rrr.value;
+    })
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -61,7 +66,7 @@ export class WeaponComponent implements OnChanges, OnInit {
       return 0;
     }
 
-    return priceSignal() - totalCostSignal();
+    return priceSignal() - totalCostSignal() * (this.rrr / 100);
   }
 
   getProfitPercentage(enchant: number, index: number) {
@@ -75,6 +80,7 @@ export class WeaponComponent implements OnChanges, OnInit {
     const percentageProfit = (profit / totalCost) * 100;
     return Math.round(percentageProfit * 10) / 10;
   }
+
   protected readonly PriceType = PriceType;
 
   protected readonly parseInt = parseInt;
